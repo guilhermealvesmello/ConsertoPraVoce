@@ -5,6 +5,7 @@
 	Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
 <div class="row gutter">
 	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 		<div class="panel panel-light">
@@ -38,9 +39,32 @@
 								<th>
 									@Html.DisplayNameFor(model => model.Observacao)
 								</th>
-								<th></th>
+								<th>Opções</th>
 							</tr>
 						</thead>
+						<tfoot>
+							<tr>
+								<th>
+									@Html.DisplayNameFor(model => model.Nome)
+								</th>
+								<th>
+									@Html.DisplayNameFor(model => model.Email)
+								</th>
+								<th>
+									@Html.DisplayNameFor(model => model.Telefone1)
+								</th>
+								<th>
+									@Html.DisplayNameFor(model => model.Telefone2)
+								</th>
+								<th>
+									@Html.DisplayNameFor(model => model.Aniversario)
+								</th>
+								<th>
+									@Html.DisplayNameFor(model => model.Observacao)
+								</th>
+								<th>Opções</th>
+							</tr>
+						</tfoot>
 						<tbody>
 							@foreach (var item in Model)
 							{
