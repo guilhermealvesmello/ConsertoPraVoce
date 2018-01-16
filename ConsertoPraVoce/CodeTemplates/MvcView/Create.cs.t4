@@ -26,9 +26,6 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
 #>
 }
 
-
-<h2><#= ViewName#></h2>
-
 <#
 } else {
 #>
@@ -75,13 +72,14 @@ if (ReferenceScriptLibraries) {
 <#
 }
 #>
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("<#= ViewName#>", "<#= ViewDataTypeShortName #>s", FormMethod.Post, new { @class = "form-horizontal" })) 
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+    <div class="row">
         <h4><#= ViewDataTypeShortName #></h4>
         <hr />
+		<fieldset>
 <# 
     if (isControlHtmlAttributesSupported) {
 #>
@@ -183,15 +181,16 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
 }
 #>
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md-offset-2 col-lg-6">
+                <input type="submit" value="Salvar" class="btn btn-default" />
             </div>
         </div>
+		</fieldset>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Voltar à Lista", "Index")
 </div>
 <#
 if(IsLayoutPageSelected && ReferenceScriptLibraries && IsBundleConfigPresent) {

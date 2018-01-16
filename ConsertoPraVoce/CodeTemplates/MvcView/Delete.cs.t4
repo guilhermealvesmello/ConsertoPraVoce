@@ -22,10 +22,8 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
 #>
 }
 
-<h2><#= ViewName#></h2>
-
 <#
-} else {
+} else { 
 #>
 
 @{
@@ -44,7 +42,7 @@ if (!String.IsNullOrEmpty(LayoutPageFile)) {
     PushIndent("    ");
 }
 #>
-<h3>Are you sure you want to delete this?</h3>
+<h3>Tem certeza que deseja deletar este registro?</h3>
 <div>
     <h4><#= ViewDataTypeShortName #></h4>
     <hr />
@@ -78,8 +76,8 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="Deletar" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar à Lista", "Index")
         </div>
     }
 </div>
