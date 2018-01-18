@@ -1,0 +1,70 @@
+﻿@model ConsertoPraVoce.Model.Client
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Tem certeza que deseja deletar este registro?</h3>
+<div>
+    <h4>Client</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone2)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Phone2)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Birthday)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Birthday)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Notes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Notes)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deletar" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar à Lista", "Index")
+        </div>
+    }
+</div>

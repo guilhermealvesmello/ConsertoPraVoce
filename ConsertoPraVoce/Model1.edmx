@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="CPVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="CPVCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Brand">
           <Key>
             <PropertyRef Name="Id" />
@@ -133,20 +133,106 @@
             <End Role="ServicePrice" EntitySet="ServicePrice" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="CPVCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="CPVCEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="Brands" EntityType="CPVCModel.Brand" />
-          <EntitySet Name="Clients" EntityType="CPVCModel.Client" />
-          <EntitySet Name="DeviceTypes" EntityType="CPVCModel.DeviceType" />
-          <EntitySet Name="PaymentMethods" EntityType="CPVCModel.PaymentMethod" />
-          <EntitySet Name="Services" EntityType="CPVCModel.Service" />
-          <EntitySet Name="ServicePrices" EntityType="CPVCModel.ServicePrice" />
-          <EntitySet Name="sysdiagrams" EntityType="CPVCModel.sysdiagram" />
-          <EntitySet Name="Users" EntityType="CPVCModel.User" />
-          <AssociationSet Name="FK_ServicePrice_Service" Association="CPVCModel.FK_ServicePrice_Service">
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Phone1" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Phone2" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="DateTime" Precision="0" />
+          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="DeviceType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="25" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentMethod">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Payments" Type="Int32" Nullable="false" />
+          <Property Name="Rate" Type="Decimal" Precision="5" Scale="2" Nullable="false" />
+          <Property Name="Term" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ServicePrices" Relationship="Self.FK_ServicePrice_Service" FromRole="Service" ToRole="ServicePrice" />
+        </EntityType>
+        <EntityType Name="ServicePrice">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdService" Type="Int32" Nullable="false" />
+          <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Price" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Service" Relationship="Self.FK_ServicePrice_Service" FromRole="ServicePrice" ToRole="Service" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ServicePrice_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="1" />
+          <End Role="ServicePrice" Type="Self.ServicePrice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ServicePrice">
+              <PropertyRef Name="IdService" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CPVCEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Brands" EntityType="Self.Brand" />
+          <EntitySet Name="Clients" EntityType="Self.Client" />
+          <EntitySet Name="DeviceTypes" EntityType="Self.DeviceType" />
+          <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethod" />
+          <EntitySet Name="Services" EntityType="Self.Service" />
+          <EntitySet Name="ServicePrices" EntityType="Self.ServicePrice" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_ServicePrice_Service" Association="Self.FK_ServicePrice_Service">
             <End Role="Service" EntitySet="Services" />
             <End Role="ServicePrice" EntitySet="ServicePrices" />
           </AssociationSet>
@@ -181,91 +267,6 @@
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
         </EntityContainer>
-        <EntityType Name="Brand">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="Client">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="Phone1" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Phone2" Type="String" MaxLength="12" FixedLength="false" Unicode="false" />
-          <Property Name="Birthday" Type="DateTime" Precision="0" />
-          <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="DeviceType">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="PaymentMethod">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="Payments" Type="Int32" Nullable="false" />
-          <Property Name="Rate" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="Term" Type="Int32" Nullable="false" />
-        </EntityType>
-        <EntityType Name="Service">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Description" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="ServicePrices" Relationship="CPVCModel.FK_ServicePrice_Service" FromRole="Service" ToRole="ServicePrice" />
-        </EntityType>
-        <EntityType Name="ServicePrice">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="IdService" Type="Int32" Nullable="false" />
-          <Property Name="Updated" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Price" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <NavigationProperty Name="Service" Relationship="CPVCModel.FK_ServicePrice_Service" FromRole="ServicePrice" ToRole="Service" />
-        </EntityType>
-        <EntityType Name="sysdiagram">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-        </EntityType>
-        <EntityType Name="User">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <Association Name="FK_ServicePrice_Service">
-          <End Type="CPVCModel.Service" Role="Service" Multiplicity="1" />
-          <End Type="CPVCModel.ServicePrice" Role="ServicePrice" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Service">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ServicePrice">
-              <PropertyRef Name="IdService" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
           <Property Type="Binary" Name="definition" Nullable="true" />
@@ -282,83 +283,83 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="CPVCModelStoreContainer" CdmEntityContainer="CPVCEntities">
+        <EntityContainerMapping StorageEntityContainer="CPVCModelStoreContainer" CdmEntityContainer="CPVCEntities1">
           <EntitySetMapping Name="Brands">
             <EntityTypeMapping TypeName="CPVCModel.Brand">
               <MappingFragment StoreEntitySet="Brand">
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Clients">
             <EntityTypeMapping TypeName="CPVCModel.Client">
               <MappingFragment StoreEntitySet="Client">
-                <ScalarProperty Name="Notes" ColumnName="Notes" />
-                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
-                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
-                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DeviceTypes">
             <EntityTypeMapping TypeName="CPVCModel.DeviceType">
               <MappingFragment StoreEntitySet="DeviceType">
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="PaymentMethods">
             <EntityTypeMapping TypeName="CPVCModel.PaymentMethod">
               <MappingFragment StoreEntitySet="PaymentMethod">
-                <ScalarProperty Name="Term" ColumnName="Term" />
-                <ScalarProperty Name="Rate" ColumnName="Rate" />
-                <ScalarProperty Name="Payments" ColumnName="Payments" />
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Payments" ColumnName="Payments" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Term" ColumnName="Term" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Services">
             <EntityTypeMapping TypeName="CPVCModel.Service">
               <MappingFragment StoreEntitySet="Service">
-                <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ServicePrices">
             <EntityTypeMapping TypeName="CPVCModel.ServicePrice">
               <MappingFragment StoreEntitySet="ServicePrice">
-                <ScalarProperty Name="Price" ColumnName="Price" />
-                <ScalarProperty Name="Updated" ColumnName="Updated" />
-                <ScalarProperty Name="IdService" ColumnName="IdService" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdService" ColumnName="IdService" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="sysdiagrams">
             <EntityTypeMapping TypeName="CPVCModel.sysdiagram">
               <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="CPVCModel.User">
               <MappingFragment StoreEntitySet="User">
-                <ScalarProperty Name="Password" ColumnName="Password" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -400,7 +401,7 @@
     <Options>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
-        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
         <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="None" />

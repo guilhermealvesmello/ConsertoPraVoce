@@ -5,11 +5,15 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="667e8c729f27478a8a554e5eb43ca0a6" Name="Diagram1">
-        <EntityTypeShape EntityType="CPVCModel.Cliente" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CPVCModel.Marca" Width="1.5" PointX="2.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CPVCModel.MeioPagamento" Width="1.5" PointX="2.75" PointY="3.75" />
-        <EntityTypeShape EntityType="CPVCModel.Servicos" Width="1.5" PointX="4.75" PointY="0.75" />
-        <EntityTypeShape EntityType="CPVCModel.TipoAparelho" Width="1.5" PointX="4.75" PointY="3.75" />
+        <EntityTypeShape EntityType="CPVCModel.Brand" Width="1.5" PointX="5.75" PointY="6.75" />
+        <EntityTypeShape EntityType="CPVCModel.Client" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CPVCModel.DeviceType" Width="1.5" PointX="7.75" PointY="4.75" />
+        <EntityTypeShape EntityType="CPVCModel.PaymentMethod" Width="1.5" PointX="7.75" PointY="7.75" />
+        <EntityTypeShape EntityType="CPVCModel.Service" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="CPVCModel.ServicePrice" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="CPVCModel.sysdiagram" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CPVCModel.User" Width="1.5" PointX="0.75" PointY="9.75" />
+        <AssociationConnector Association="CPVCModel.FK_ServicePrice_Service" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

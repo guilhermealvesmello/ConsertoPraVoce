@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ConsertoPraVoce.Model
+namespace ConsertoPraVoce
 {
     using System;
     using System.Data.Entity;
@@ -15,10 +15,10 @@ namespace ConsertoPraVoce.Model
     using System.Data.Entity.Core.Objects;
     using System.Linq;
     
-    public partial class CPVCEntities : DbContext
+    public partial class CPVCEntities1 : DbContext
     {
-        public CPVCEntities()
-            : base("name=CPVCEntities")
+        public CPVCEntities1()
+            : base("name=CPVCEntities1")
         {
         }
     
