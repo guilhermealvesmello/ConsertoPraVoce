@@ -1,0 +1,32 @@
+﻿@model ConsertoPraVoce.Model.CategoriaTransacao
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h4>CategoriaTransacao</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescricaoLonga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescricaoLonga)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Voltar à Lista", "Index")
+</p>

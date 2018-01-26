@@ -1,0 +1,56 @@
+﻿@model ConsertoPraVoce.Model.OrdemServico
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h4>OrdemServico</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DescricaoCurta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescricaoCurta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DescricaoLonga)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DescricaoLonga)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataCriacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataCriacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataEdicao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataEdicao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Prazo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Prazo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Voltar à Lista", "Index")
+</p>

@@ -51,8 +51,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoriaTransacao.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="Cliente.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Conta.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
     <Compile Include="CPVC.Context.cs">
@@ -73,14 +79,49 @@
     <Compile Include="Marca.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="MeioPagamento.cs">
+    <Compile Include="Metadata\Conta.cs" />
+    <Compile Include="Metadata\Marca.cs" />
+    <Compile Include="Metadata\Cliente.cs" />
+    <Compile Include="Metadata\MetodoPagamento.cs" />
+    <Compile Include="Metadata\Servico.cs" />
+    <Compile Include="Metadata\OrdemServico.cs" />
+    <Compile Include="Metadata\PrecoServico.cs" />
+    <Compile Include="Metadata\CategoriaTransacao.cs" />
+    <Compile Include="Metadata\TipoAparelho.cs" />
+    <Compile Include="Metadata\Transacao.cs" />
+    <Compile Include="Metadata\Usuario.cs" />
+    <Compile Include="MetodoPagamento.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrdemServico.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PrecoServico.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Servicos.cs">
+    <Compile Include="Scripts.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Servico.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sp_helpdiagrams_Result.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sysdiagrams.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
     <Compile Include="TipoAparelho.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Transacoes.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Usuario.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
   </ItemGroup>

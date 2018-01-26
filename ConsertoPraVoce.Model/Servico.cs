@@ -12,24 +12,18 @@ namespace ConsertoPraVoce.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Cliente
+    public partial class Servico
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Cliente()
+        public Servico()
         {
-            this.Transacoes = new HashSet<Transacoes>();
+            this.PrecoServico = new HashSet<PrecoServico>();
         }
     
         public int Id { get; set; }
-        public string Nome { get; set; }
-        public string Email { get; set; }
-        public string Telefone1 { get; set; }
-        public string Telefone2 { get; set; }
-        public Nullable<System.DateTime> DataNascimento { get; set; }
-        public string Notas { get; set; }
-        public Nullable<System.DateTime> Data { get; set; }
+        public string Descricao { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transacoes> Transacoes { get; set; }
+        public virtual ICollection<PrecoServico> PrecoServico { get; set; }
     }
 }

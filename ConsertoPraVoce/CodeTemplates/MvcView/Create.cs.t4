@@ -72,7 +72,7 @@ if (ReferenceScriptLibraries) {
 <#
 }
 #>
-@using (Html.BeginForm("<#= ViewName#>", "<#= ViewDataTypeShortName #>s", FormMethod.Post, new { @class = "form-horizontal" })) 
+@using (Html.BeginForm("<#= ViewName#>", "<#= ViewDataTypeShortName #>", FormMethod.Post, new { @class = "form-horizontal" })) 
 {
     @Html.AntiForgeryToken()
     

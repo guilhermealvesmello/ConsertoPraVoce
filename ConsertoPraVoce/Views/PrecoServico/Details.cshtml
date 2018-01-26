@@ -1,0 +1,56 @@
+﻿@model ConsertoPraVoce.Model.PrecoServico
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h4>PrecoServico</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.DataAtualizacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataAtualizacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecoDinheiro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecoDinheiro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecoDebito)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecoDebito)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PrecoCredito)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PrecoCredito)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Servico.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Servico.Descricao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Voltar à Lista", "Index")
+</p>
