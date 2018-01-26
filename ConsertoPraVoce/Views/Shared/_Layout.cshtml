@@ -19,8 +19,7 @@
 	<!-- Bar Indicator -->
 	<link href="~/Content/css/barIndicator.css" rel="stylesheet" />
 	<!-- Font Awesome -->
-	<link href="~/Content/fonts/font-awesome.min.css" rel="stylesheet" />
-
+	<link href="~/Content/fonts/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 
 
 	<!-- Data Tables -->
@@ -309,37 +308,70 @@
 					</a>
 				</li>
                 <li>
-                    @Html.ActionLink("Categorias da Transação", "Index", "CategoriaTransacao")
+                    <a href="@Url.Action("Index", "CategoriaTransacao")">
+                        <i class="fa fa-list-ul"></i>
+                        <span>Categorias da Transação</span>
+                    </a>                    
                 </li>
                 <li>
-                    @Html.ActionLink("Clientes", "Index", "Cliente")
+                    <a href="@Url.Action("Index", "Cliente")">
+                        <i class="fa fa-handshake-o"></i>
+                        <span>Clientes</span>
+                    </a>
                 </li>
                 <li>
-                    @Html.ActionLink("Contas", "Index", "Conta")
+                    <a href="@Url.Action("Index", "Conta")">
+                        <i class="fa fa-bank"></i>
+                        <span>Contas</span>
+                    </a>
                 </li>
                 <li>
-                    @Html.ActionLink("Marcas", "Index", "Marca")
+                    <a href="@Url.Action("Index", "Marca")">
+                        <i class="fa fa-trademark"></i>
+                        <span>Marcas</span>
+                    </a>
                 </li>
                 <li>
-                    @Html.ActionLink("Métodos de Pagamento", "Index", "MetodoPagamento")
+                    <a href="@Url.Action("Index", "MetodoPagamento")">
+                        <i class="fa fa-credit-card"></i>
+                        <span>Métodos de Pagamento</span>
+                    </a>
                 </li>
                 <li>
-                    @Html.ActionLink("Ordens de Serviço", "Index", "OrdemServico")
+                    <a href="@Url.Action("Index", "OrdemServico")">
+                        <i class="fa fa-check-square-o"></i>
+                        <span>Ordens de Serviço</span>
+                    </a>
                 </li>
                 <li>
-                    @Html.ActionLink("Preços de Serviço", "Index", "PrecoServico")
+                    <a href="@Url.Action("Index", "PrecoServico")">
+                        <i class="fa fa-money"></i>
+                        <span>Preços de Serviço</span>
+                    </a>
                 </li>
                 <li>
-                    @Html.ActionLink("Serviços", "Index", "Servico")
+                    <a href="@Url.Action("Index", "Servico")">
+                        <i class="fa fa-wrench"></i>
+                        <span>Serviços</span>
+                    </a> 
                 </li>
                 <li>
-                    @Html.ActionLink("Tipos de Aparelho", "Index", "TipoAparelho")
+                    <a href="@Url.Action("Index", "TipoAparelho")">
+                        <i class="fa fa-mobile"></i>
+                        <span>Tipos de Aparelho</span>
+                    </a> 
                 </li>
                 <li>
-                    @Html.ActionLink("Transações", "Index", "Transacao")
+                    <a href="@Url.Action("Index", "Transacao")">
+                        <i class="fa fa-retweet"></i>
+                        <span>Transações</span>
+                    </a> 
                 </li>
                 <li>
-                    @Html.ActionLink("Usuários", "Index", "Usuario")
+                    <a href="@Url.Action("Index", "Usuario")">
+                        <i class="fa fa-user"></i>
+                        <span>Usuários</span>
+                    </a> 
                 </li>
 				<li>					
 					<a href='blog.html'>
