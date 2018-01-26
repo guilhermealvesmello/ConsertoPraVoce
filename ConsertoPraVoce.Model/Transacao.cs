@@ -12,7 +12,7 @@ namespace ConsertoPraVoce.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Transacoes
+    public partial class Transacao
     {
         public int Id { get; set; }
         public System.DateTime DataTransacao { get; set; }

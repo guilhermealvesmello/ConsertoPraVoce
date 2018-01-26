@@ -217,6 +217,7 @@
     <Compile Include="Controllers\PrecoServicoController.cs" />
     <Compile Include="Controllers\ServicoController.cs" />
     <Compile Include="Controllers\TipoAparelhoController.cs" />
+    <Compile Include="Controllers\TransacaoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -519,6 +520,11 @@
     <Content Include="Views\TipoAparelho\Details.cshtml" />
     <Content Include="Views\TipoAparelho\Edit.cshtml" />
     <Content Include="Views\TipoAparelho\Index.cshtml" />
+    <Content Include="Views\Transacao\Create.cshtml" />
+    <Content Include="Views\Transacao\Delete.cshtml" />
+    <Content Include="Views\Transacao\Details.cshtml" />
+    <Content Include="Views\Transacao\Edit.cshtml" />
+    <Content Include="Views\Transacao\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

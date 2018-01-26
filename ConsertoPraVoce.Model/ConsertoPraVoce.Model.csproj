@@ -118,7 +118,7 @@
     <Compile Include="TipoAparelho.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Transacoes.cs">
+    <Compile Include="Transacao.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Usuario.cs">

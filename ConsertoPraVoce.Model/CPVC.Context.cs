@@ -38,8 +38,8 @@ namespace ConsertoPraVoce.Model
         public virtual DbSet<Servico> Servico { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TipoAparelho> TipoAparelho { get; set; }
-        public virtual DbSet<Transacoes> Transacoes { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
+        public virtual DbSet<Transacao> Transacao { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {
