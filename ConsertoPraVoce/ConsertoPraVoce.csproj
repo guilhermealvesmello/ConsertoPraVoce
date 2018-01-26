@@ -218,6 +218,7 @@
     <Compile Include="Controllers\ScriptsController.cs" />
     <Compile Include="Controllers\ServicoController.cs" />
     <Compile Include="Controllers\TipoAparelhoController.cs" />
+    <Compile Include="Controllers\TransacaoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

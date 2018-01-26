@@ -105,7 +105,7 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="25" Nullable="false" />
         </EntityType>
-        <EntityType Name="Transacoes">
+        <EntityType Name="Transacao">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -145,48 +145,48 @@
         </Association>
         <Association Name="FK_Transactions_Account">
           <End Role="Conta" Type="Self.Conta" Multiplicity="1" />
-          <End Role="Transacoes" Type="Self.Transacoes" Multiplicity="*" />
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Conta">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Transacoes">
+            <Dependent Role="Transacao">
               <PropertyRef Name="IdConta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Transactions_Client">
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
-          <End Role="Transacoes" Type="Self.Transacoes" Multiplicity="*" />
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Transacoes">
+            <Dependent Role="Transacao">
               <PropertyRef Name="IdCliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Transactions_ServiceOrder">
           <End Role="OrdemServico" Type="Self.OrdemServico" Multiplicity="0..1" />
-          <End Role="Transacoes" Type="Self.Transacoes" Multiplicity="*" />
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrdemServico">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Transacoes">
+            <Dependent Role="Transacao">
               <PropertyRef Name="IdOrdemServico" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Transactions_TransactionCategory">
           <End Role="CategoriaTransacao" Type="Self.CategoriaTransacao" Multiplicity="1" />
-          <End Role="Transacoes" Type="Self.Transacoes" Multiplicity="*" />
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CategoriaTransacao">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Transacoes">
+            <Dependent Role="Transacao">
               <PropertyRef Name="IdCategoriaTransacao" />
             </Dependent>
           </ReferentialConstraint>
@@ -234,7 +234,7 @@
           <EntitySet Name="Servico" EntityType="Self.Servico" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoAparelho" EntityType="Self.TipoAparelho" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Transacoes" EntityType="Self.Transacoes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transacao" EntityType="Self.Transacao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_ServicePrice_Service" Association="Self.FK_ServicePrice_Service">
             <End Role="Servico" EntitySet="Servico" />
@@ -242,19 +242,19 @@
           </AssociationSet>
           <AssociationSet Name="FK_Transactions_Account" Association="Self.FK_Transactions_Account">
             <End Role="Conta" EntitySet="Conta" />
-            <End Role="Transacoes" EntitySet="Transacoes" />
+            <End Role="Transacao" EntitySet="Transacao" />
           </AssociationSet>
           <AssociationSet Name="FK_Transactions_Client" Association="Self.FK_Transactions_Client">
             <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Transacoes" EntitySet="Transacoes" />
+            <End Role="Transacao" EntitySet="Transacao" />
           </AssociationSet>
           <AssociationSet Name="FK_Transactions_ServiceOrder" Association="Self.FK_Transactions_ServiceOrder">
             <End Role="OrdemServico" EntitySet="OrdemServico" />
-            <End Role="Transacoes" EntitySet="Transacoes" />
+            <End Role="Transacao" EntitySet="Transacao" />
           </AssociationSet>
           <AssociationSet Name="FK_Transactions_TransactionCategory" Association="Self.FK_Transactions_TransactionCategory">
             <End Role="CategoriaTransacao" EntitySet="CategoriaTransacao" />
-            <End Role="Transacoes" EntitySet="Transacoes" />
+            <End Role="Transacao" EntitySet="Transacao" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -303,27 +303,27 @@
           <EntitySet Name="Servico" EntityType="CPVCModel.Servico" />
           <EntitySet Name="sysdiagrams" EntityType="CPVCModel.sysdiagrams" />
           <EntitySet Name="TipoAparelho" EntityType="CPVCModel.TipoAparelho" />
-          <EntitySet Name="Transacoes" EntityType="CPVCModel.Transacoes" />
           <EntitySet Name="Usuario" EntityType="CPVCModel.Usuario" />
-          <AssociationSet Name="FK_Transactions_TransactionCategory" Association="CPVCModel.FK_Transactions_TransactionCategory">
-            <End Role="CategoriaTransacao" EntitySet="CategoriaTransacao" />
-            <End Role="Transacoes" EntitySet="Transacoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transactions_Client" Association="CPVCModel.FK_Transactions_Client">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Transacoes" EntitySet="Transacoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transactions_Account" Association="CPVCModel.FK_Transactions_Account">
-            <End Role="Conta" EntitySet="Conta" />
-            <End Role="Transacoes" EntitySet="Transacoes" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transactions_ServiceOrder" Association="CPVCModel.FK_Transactions_ServiceOrder">
-            <End Role="OrdemServico" EntitySet="OrdemServico" />
-            <End Role="Transacoes" EntitySet="Transacoes" />
-          </AssociationSet>
           <AssociationSet Name="FK_ServicePrice_Service" Association="CPVCModel.FK_ServicePrice_Service">
             <End Role="Servico" EntitySet="Servico" />
             <End Role="PrecoServico" EntitySet="PrecoServico" />
+          </AssociationSet>
+          <EntitySet Name="Transacao" EntityType="CPVCModel.Transacao" />
+          <AssociationSet Name="FK_Transactions_TransactionCategory" Association="CPVCModel.FK_Transactions_TransactionCategory">
+            <End Role="CategoriaTransacao" EntitySet="CategoriaTransacao" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Client" Association="CPVCModel.FK_Transactions_Client">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Account" Association="CPVCModel.FK_Transactions_Account">
+            <End Role="Conta" EntitySet="Conta" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_ServiceOrder" Association="CPVCModel.FK_Transactions_ServiceOrder">
+            <End Role="OrdemServico" EntitySet="OrdemServico" />
+            <End Role="Transacao" EntitySet="Transacao" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -344,7 +344,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descricao" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DescricaoLonga" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Transacoes" Relationship="CPVCModel.FK_Transactions_TransactionCategory" FromRole="CategoriaTransacao" ToRole="Transacoes" />
+          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transactions_TransactionCategory" FromRole="CategoriaTransacao" ToRole="Transacao" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -358,7 +358,7 @@
           <Property Name="DataNascimento" Type="DateTime" Precision="0" />
           <Property Name="Notas" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Data" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Transacoes" Relationship="CPVCModel.FK_Transactions_Client" FromRole="Cliente" ToRole="Transacoes" />
+          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transactions_Client" FromRole="Cliente" ToRole="Transacao" />
         </EntityType>
         <EntityType Name="Conta">
           <Key>
@@ -367,7 +367,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descricao" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Transacoes" Relationship="CPVCModel.FK_Transactions_Account" FromRole="Conta" ToRole="Transacoes" />
+          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transactions_Account" FromRole="Conta" ToRole="Transacao" />
         </EntityType>
         <EntityType Name="Marca">
           <Key>
@@ -396,7 +396,7 @@
           <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataEdicao" Type="DateTime" Precision="3" />
           <Property Name="Prazo" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Transacoes" Relationship="CPVCModel.FK_Transactions_ServiceOrder" FromRole="OrdemServico" ToRole="Transacoes" />
+          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transactions_ServiceOrder" FromRole="OrdemServico" ToRole="Transacao" />
         </EntityType>
         <EntityType Name="PrecoServico">
           <Key>
@@ -443,7 +443,28 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descricao" Type="String" Nullable="false" MaxLength="25" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Transacoes">
+        <EntityType Name="Usuario">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="Senha" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_ServicePrice_Service">
+          <End Type="CPVCModel.Servico" Role="Servico" Multiplicity="1" />
+          <End Type="CPVCModel.PrecoServico" Role="PrecoServico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrecoServico">
+              <PropertyRef Name="IdServico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Transacao">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -459,77 +480,56 @@
           <Property Name="IdConta" Type="Int32" Nullable="false" />
           <Property Name="IdOrdemServico" Type="Int32" />
           <Property Name="TipoEntrada" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CategoriaTransacao" Relationship="CPVCModel.FK_Transactions_TransactionCategory" FromRole="Transacoes" ToRole="CategoriaTransacao" />
-          <NavigationProperty Name="Cliente" Relationship="CPVCModel.FK_Transactions_Client" FromRole="Transacoes" ToRole="Cliente" />
-          <NavigationProperty Name="Conta" Relationship="CPVCModel.FK_Transactions_Account" FromRole="Transacoes" ToRole="Conta" />
-          <NavigationProperty Name="OrdemServico" Relationship="CPVCModel.FK_Transactions_ServiceOrder" FromRole="Transacoes" ToRole="OrdemServico" />
-        </EntityType>
-        <EntityType Name="Usuario">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="Senha" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CategoriaTransacao" Relationship="CPVCModel.FK_Transactions_TransactionCategory" FromRole="Transacao" ToRole="CategoriaTransacao" />
+          <NavigationProperty Name="Cliente" Relationship="CPVCModel.FK_Transactions_Client" FromRole="Transacao" ToRole="Cliente" />
+          <NavigationProperty Name="Conta" Relationship="CPVCModel.FK_Transactions_Account" FromRole="Transacao" ToRole="Conta" />
+          <NavigationProperty Name="OrdemServico" Relationship="CPVCModel.FK_Transactions_ServiceOrder" FromRole="Transacao" ToRole="OrdemServico" />
         </EntityType>
         <Association Name="FK_Transactions_TransactionCategory">
           <End Type="CPVCModel.CategoriaTransacao" Role="CategoriaTransacao" Multiplicity="1" />
-          <End Type="CPVCModel.Transacoes" Role="Transacoes" Multiplicity="*" />
+          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="CategoriaTransacao">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Transacoes">
+            <Dependent Role="Transacao">
               <PropertyRef Name="IdCategoriaTransacao" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Transactions_Client">
           <End Type="CPVCModel.Cliente" Role="Cliente" Multiplicity="0..1" />
-          <End Type="CPVCModel.Transacoes" Role="Transacoes" Multiplicity="*" />
+          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Cliente">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Transacoes">
+            <Dependent Role="Transacao">
               <PropertyRef Name="IdCliente" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Transactions_Account">
           <End Type="CPVCModel.Conta" Role="Conta" Multiplicity="1" />
-          <End Type="CPVCModel.Transacoes" Role="Transacoes" Multiplicity="*" />
+          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Conta">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Transacoes">
+            <Dependent Role="Transacao">
               <PropertyRef Name="IdConta" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Transactions_ServiceOrder">
           <End Type="CPVCModel.OrdemServico" Role="OrdemServico" Multiplicity="0..1" />
-          <End Type="CPVCModel.Transacoes" Role="Transacoes" Multiplicity="*" />
+          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="OrdemServico">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="Transacoes">
+            <Dependent Role="Transacao">
               <PropertyRef Name="IdOrdemServico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_ServicePrice_Service">
-          <End Type="CPVCModel.Servico" Role="Servico" Multiplicity="1" />
-          <End Type="CPVCModel.PrecoServico" Role="PrecoServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servico">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PrecoServico">
-              <PropertyRef Name="IdServico" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -674,9 +674,19 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Transacoes">
-            <EntityTypeMapping TypeName="CPVCModel.Transacoes">
-              <MappingFragment StoreEntitySet="Transacoes">
+          <EntitySetMapping Name="Usuario">
+            <EntityTypeMapping TypeName="CPVCModel.Usuario">
+              <MappingFragment StoreEntitySet="Usuario">
+                <ScalarProperty Name="Senha" ColumnName="Senha" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transacao">
+            <EntityTypeMapping TypeName="CPVCModel.Transacao">
+              <MappingFragment StoreEntitySet="Transacao">
                 <ScalarProperty Name="TipoEntrada" ColumnName="TipoEntrada" />
                 <ScalarProperty Name="IdOrdemServico" ColumnName="IdOrdemServico" />
                 <ScalarProperty Name="IdConta" ColumnName="IdConta" />
@@ -688,16 +698,6 @@
                 <ScalarProperty Name="ValorBruto" ColumnName="ValorBruto" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="DataTransacao" ColumnName="DataTransacao" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Usuario">
-            <EntityTypeMapping TypeName="CPVCModel.Usuario">
-              <MappingFragment StoreEntitySet="Usuario">
-                <ScalarProperty Name="Senha" ColumnName="Senha" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

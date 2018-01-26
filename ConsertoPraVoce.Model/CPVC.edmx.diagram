@@ -16,13 +16,13 @@
         <EntityTypeShape EntityType="CPVCModel.Servico" Width="1.5" PointX="5.75" PointY="1.375" />
         <EntityTypeShape EntityType="CPVCModel.sysdiagrams" Width="1.5" PointX="4.75" PointY="7.75" />
         <EntityTypeShape EntityType="CPVCModel.TipoAparelho" Width="1.5" PointX="6.75" PointY="7.75" />
-        <EntityTypeShape EntityType="CPVCModel.Transacoes" Width="1.5" PointX="3" PointY="1" />
         <EntityTypeShape EntityType="CPVCModel.Usuario" Width="1.5" PointX="8.75" PointY="7.75" />
+        <AssociationConnector Association="CPVCModel.FK_ServicePrice_Service" />
+        <EntityTypeShape EntityType="CPVCModel.Transacao" Width="1.5" PointX="3.5" PointY="1.625" />
         <AssociationConnector Association="CPVCModel.FK_Transactions_TransactionCategory" />
         <AssociationConnector Association="CPVCModel.FK_Transactions_Client" />
         <AssociationConnector Association="CPVCModel.FK_Transactions_Account" />
         <AssociationConnector Association="CPVCModel.FK_Transactions_ServiceOrder" />
-        <AssociationConnector Association="CPVCModel.FK_ServicePrice_Service" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
