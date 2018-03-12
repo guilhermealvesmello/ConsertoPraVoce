@@ -14,6 +14,14 @@ namespace ConsertoPraVoce.Controllers
     {
         private CPVCEntities db = new CPVCEntities();
 
+		private Cliente LoadDefaultParameters()
+		{
+			var cli = new Cliente();
+			cli.Data = DateTime.Now;
+			return cli;
+		}
+
+
         // GET: Cliente
         public ActionResult Index()
         {
@@ -38,7 +46,9 @@ namespace ConsertoPraVoce.Controllers
         // GET: Cliente/Create
         public ActionResult Create()
         {
-            return View();
+			var cli = LoadDefaultParameters();
+
+			return View(cli);
         }
 
         // POST: Cliente/Create

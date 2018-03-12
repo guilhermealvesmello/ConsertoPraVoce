@@ -54,7 +54,6 @@
     <Compile Include="CategoriaTransacao.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="Class1.cs" />
     <Compile Include="Cliente.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>

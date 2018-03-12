@@ -35,15 +35,20 @@ namespace ConsertoPraVoce.Model
             [MaxLength(50, ErrorMessage = "Máximo número de caracteres: 50")]
             public string Telefone2 { get; set; }
 
-            [DisplayName("Data de Nascimento")]
-            public DateTime DataNascimento { get; set; }
+            [DisplayName("Aniversário")]
+			[DataType(DataType.Date)]
+			[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = "")]
+			public DateTime DataNascimento { get; set; }
 
             [DisplayName("Notas")]
-            [MaxLength(500, ErrorMessage = "Máximo número de caracteres: 500")]
+			[DataType(DataType.MultilineText)]
+			[MaxLength(500, ErrorMessage = "Máximo número de caracteres: 500")]
             public string Notas { get; set; }
 
-            [DisplayName("Data")]
-            public DateTime Data { get; set; }
+            [DisplayName("Data Cadastro")]
+			[DataType(DataType.Date)]
+			[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = "")]
+			public DateTime Data { get; set; }
 
         }
 
