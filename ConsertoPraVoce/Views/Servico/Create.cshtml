@@ -5,7 +5,7 @@
 }
 
 
-@using (Html.BeginForm("Create", "Servico", FormMethod.Post, new { @class = "form-horizontal" })) 
+@using (Html.BeginForm("Create", "Servico", FormMethod.Post, new { @class = "form-horizontal col-md-5" })) 
 {
     @Html.AntiForgeryToken()
     
@@ -29,12 +29,7 @@
         </div>
 		</fieldset>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Voltar à Lista", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
+	<div>
+		@Html.ActionLink("Voltar à Lista", "Index")
+	</div>
 }

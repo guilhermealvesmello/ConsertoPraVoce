@@ -12,18 +12,23 @@ namespace ConsertoPraVoce.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class TipoAparelho
+    public partial class Fornecedor
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TipoAparelho()
+        public Fornecedor()
         {
-            this.ModeloAparelho = new HashSet<ModeloAparelho>();
+            this.OrdemCompra = new HashSet<OrdemCompra>();
         }
     
         public int Id { get; set; }
-        public string Descricao { get; set; }
+        public string Nome { get; set; }
+        public string Endereco { get; set; }
+        public string Email { get; set; }
+        public string Cnpj { get; set; }
+        public string InscEstadual { get; set; }
+        public string Telefone { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ModeloAparelho> ModeloAparelho { get; set; }
+        public virtual ICollection<OrdemCompra> OrdemCompra { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace ConsertoPraVoce.Model
         public Cliente()
         {
             this.Transacao = new HashSet<Transacao>();
+            this.OrdemServico = new HashSet<OrdemServico>();
         }
     
         public int Id { get; set; }
@@ -31,5 +32,7 @@ namespace ConsertoPraVoce.Model
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transacao> Transacao { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrdemServico> OrdemServico { get; set; }
     }
 }

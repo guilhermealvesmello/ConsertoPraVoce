@@ -26,10 +26,12 @@ namespace ConsertoPraVoce.Model
         public int IdConta { get; set; }
         public Nullable<int> IdOrdemServico { get; set; }
         public string TipoEntrada { get; set; }
+        public Nullable<int> IdOrdemCompra { get; set; }
     
         public virtual CategoriaTransacao CategoriaTransacao { get; set; }
         public virtual Cliente Cliente { get; set; }
         public virtual Conta Conta { get; set; }
         public virtual OrdemServico OrdemServico { get; set; }
+        public virtual OrdemCompra OrdemCompra { get; set; }
     }
 }

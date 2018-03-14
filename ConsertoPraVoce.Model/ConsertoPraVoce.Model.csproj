@@ -75,6 +75,18 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CPVC.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Entrada.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Fornecedor.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemEntrada.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ItemSaida.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Marca.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
@@ -82,6 +94,7 @@
     <Compile Include="Metadata\Marca.cs" />
     <Compile Include="Metadata\Cliente.cs" />
     <Compile Include="Metadata\MetodoPagamento.cs" />
+    <Compile Include="Metadata\ModeloAparelho.cs" />
     <Compile Include="Metadata\Servico.cs" />
     <Compile Include="Metadata\OrdemServico.cs" />
     <Compile Include="Metadata\PrecoServico.cs" />
@@ -92,13 +105,25 @@
     <Compile Include="MetodoPagamento.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ModeloAparelho.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrdemCompra.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="OrdemServico.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
     <Compile Include="PrecoServico.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Produto.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Saida.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Scripts.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>

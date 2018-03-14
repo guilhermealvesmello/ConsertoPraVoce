@@ -1,0 +1,48 @@
+﻿@model ConsertoPraVoce.Model.ModeloAparelho
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h4>ModeloAparelho</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NumeroModelo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NumeroModelo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Marca.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Marca.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoAparelho.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TipoAparelho.Descricao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Voltar à Lista", "Index")
+</p>

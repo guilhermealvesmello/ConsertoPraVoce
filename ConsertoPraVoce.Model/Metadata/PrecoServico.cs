@@ -25,17 +25,26 @@ namespace ConsertoPraVoce.Model
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
             [DisplayName("Editado em")]
-            public DateTime DataAtualizacao { get; set; }
+			[DataType(DataType.Date)]
+			[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = "")]
+			public DateTime DataAtualizacao { get; set; }
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
             [DisplayName("Preço em Dinheiro")]
-            public decimal PrecoDinheiro { get; set; }
+			[DataType(DataType.Currency)]
+			[DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = true)]
+			public decimal PrecoDinheiro { get; set; }
 
             [DisplayName("Preço no Débito")]
-            public decimal PrecoDebito { get; set; }
+			[DataType(DataType.Currency)]
+			[DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = true)]
+			public decimal PrecoDebito { get; set; }
 
             [DisplayName("Preço no Crédito")]
-            public decimal PrecoCredito { get; set; }
+			[DataType(DataType.Currency)]
+			[UIHint("Currency")]
+			[DisplayFormat(DataFormatString ="{0:C0}", ApplyFormatInEditMode = true)]
+			public decimal PrecoCredito { get; set; }
 
         }
 

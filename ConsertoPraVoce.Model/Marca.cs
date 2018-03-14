@@ -14,7 +14,19 @@ namespace ConsertoPraVoce.Model
     
     public partial class Marca
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Marca()
+        {
+            this.Produto = new HashSet<Produto>();
+            this.ModeloAparelho = new HashSet<ModeloAparelho>();
+        }
+    
         public int Id { get; set; }
         public string Descricao { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Produto> Produto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ModeloAparelho> ModeloAparelho { get; set; }
     }
 }

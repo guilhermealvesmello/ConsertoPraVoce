@@ -213,6 +213,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\MetodoPagamentoController.cs" />
+    <Compile Include="Controllers\ModeloAparelhoController.cs" />
     <Compile Include="Controllers\OrdemServicoController.cs" />
     <Compile Include="Controllers\PrecoServicoController.cs" />
     <Compile Include="Controllers\ScriptsController.cs" />
@@ -554,6 +555,11 @@
     <Content Include="Views\Scripts\Details.cshtml" />
     <Content Include="Views\Scripts\Edit.cshtml" />
     <Content Include="Views\Scripts\Index.cshtml" />
+    <Content Include="Views\ModeloAparelho\Create.cshtml" />
+    <Content Include="Views\ModeloAparelho\Delete.cshtml" />
+    <Content Include="Views\ModeloAparelho\Details.cshtml" />
+    <Content Include="Views\ModeloAparelho\Edit.cshtml" />
+    <Content Include="Views\ModeloAparelho\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

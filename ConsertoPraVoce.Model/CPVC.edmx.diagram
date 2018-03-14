@@ -23,6 +23,26 @@
         <AssociationConnector Association="CPVCModel.FK_Transactions_Client" />
         <AssociationConnector Association="CPVCModel.FK_Transactions_Account" />
         <AssociationConnector Association="CPVCModel.FK_Transactions_ServiceOrder" />
+        <EntityTypeShape EntityType="CPVCModel.Entrada" Width="1.5" PointX="8" PointY="14.75" />
+        <EntityTypeShape EntityType="CPVCModel.Fornecedor" Width="1.5" PointX="3.5" PointY="14.5" />
+        <EntityTypeShape EntityType="CPVCModel.ItemEntrada" Width="1.5" PointX="10.25" PointY="10.625" />
+        <EntityTypeShape EntityType="CPVCModel.ItemSaida" Width="1.5" PointX="13.25" PointY="10.625" />
+        <EntityTypeShape EntityType="CPVCModel.OrdemCompra" Width="1.5" PointX="5.75" PointY="14.375" />
+        <EntityTypeShape EntityType="CPVCModel.Produto" Width="1.5" PointX="8" PointY="10.5" />
+        <EntityTypeShape EntityType="CPVCModel.Saida" Width="1.5" PointX="11" PointY="13.75" />
+        <AssociationConnector Association="CPVCModel.FK_OrdemServico_Cliente" />
+        <AssociationConnector Association="CPVCModel.FK_Entrada_OrdemCompra" />
+        <AssociationConnector Association="CPVCModel.FK_ItemEntrada_Entrada" />
+        <AssociationConnector Association="CPVCModel.FK_OrdemCompra_Fornecedor" />
+        <AssociationConnector Association="CPVCModel.FK_ItemEntrada_Produto" />
+        <AssociationConnector Association="CPVCModel.FK_ItemSaida_Produto" />
+        <AssociationConnector Association="CPVCModel.FK_ItemSaida_Saida" />
+        <AssociationConnector Association="CPVCModel.FK_Produto_Marca" />
+        <AssociationConnector Association="CPVCModel.FK_Transacao_OrdemCompra" />
+        <AssociationConnector Association="CPVCModel.FK_Saida_OrdemServico" />
+        <EntityTypeShape EntityType="CPVCModel.ModeloAparelho" Width="1.5" PointX="11" PointY="5.875" />
+        <AssociationConnector Association="CPVCModel.FK_ModeloAparelho_Marca" />
+        <AssociationConnector Association="CPVCModel.FK_ModeloAparelho_TipoAparelho" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
