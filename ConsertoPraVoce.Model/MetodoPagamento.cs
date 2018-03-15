@@ -16,8 +16,8 @@ namespace ConsertoPraVoce.Model
     {
         public int Id { get; set; }
         public string Descricao { get; set; }
-        public int Pagamentos { get; set; }
+        public int Parcelas { get; set; }
         public decimal Taxa { get; set; }
-        public int Prazo { get; set; }
+        public int PrazoPagamento { get; set; }
     }
 }

@@ -46,13 +46,14 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Endereco" Type="varchar" MaxLength="50" />
           <Property Name="Email" Type="varchar" MaxLength="50" />
           <Property Name="Cnpj" Type="varchar" MaxLength="50" />
           <Property Name="InscEstadual" Type="varchar" MaxLength="50" />
           <Property Name="Telefone" Type="varchar" MaxLength="50" />
+          <Property Name="Telefone2" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ItemEntrada">
           <Key>
@@ -87,9 +88,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Pagamentos" Type="int" Nullable="false" />
+          <Property Name="Parcelas" Type="int" Nullable="false" />
           <Property Name="Taxa" Type="decimal" Precision="5" Scale="2" Nullable="false" />
-          <Property Name="Prazo" Type="int" Nullable="false" />
+          <Property Name="PrazoPagamento" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ModeloAparelho">
           <Key>
@@ -107,7 +108,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="DescricaoCurta" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DescricaoLonga" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescricaoLonga" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="DataCriacao" Type="datetime" Nullable="false" />
           <Property Name="DataEdicao" Type="datetime" />
           <Property Name="IdFornecedor" Type="int" />
@@ -128,7 +129,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="IdServico" Type="int" Nullable="false" />
           <Property Name="DataAtualizacao" Type="datetime" Nullable="false" />
           <Property Name="PrecoDinheiro" Type="decimal" Precision="10" Scale="2" Nullable="false" />
@@ -143,6 +144,7 @@
           <Property Name="Descricao" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="QtdeMinima" Type="int" />
           <Property Name="Sku" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdTipoProduto" Type="int" Nullable="false" />
           <Property Name="IdMarca" Type="int" />
         </EntityType>
         <EntityType Name="Saida">
@@ -168,22 +170,19 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
-        </EntityType>
         <EntityType Name="TipoAparelho">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TipoProduto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descricao" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Transacao">
           <Key>
@@ -332,6 +331,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Produto_TipoProduto">
+          <End Role="TipoProduto" Type="Self.TipoProduto" Multiplicity="1" />
+          <End Role="Produto" Type="Self.Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProduto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="IdTipoProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Saida_OrdemServico">
           <End Role="OrdemServico" Type="Self.OrdemServico" Multiplicity="0..1" />
           <End Role="Saida" Type="Self.Saida" Multiplicity="*" />
@@ -465,8 +476,8 @@
           <EntitySet Name="Saida" EntityType="Self.Saida" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Scripts" EntityType="Self.Scripts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Servico" EntityType="Self.Servico" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="TipoAparelho" EntityType="Self.TipoAparelho" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TipoProduto" EntityType="Self.TipoProduto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transacao" EntityType="Self.Transacao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Entrada_OrdemCompra" Association="Self.FK_Entrada_OrdemCompra">
@@ -507,6 +518,10 @@
           </AssociationSet>
           <AssociationSet Name="FK_Produto_Marca" Association="Self.FK_Produto_Marca">
             <End Role="Marca" EntitySet="Marca" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Produto_TipoProduto" Association="Self.FK_Produto_TipoProduto">
+            <End Role="TipoProduto" EntitySet="TipoProduto" />
             <End Role="Produto" EntitySet="Produto" />
           </AssociationSet>
           <AssociationSet Name="FK_Saida_OrdemServico" Association="Self.FK_Saida_OrdemServico">
@@ -577,18 +592,11 @@
           <EntitySet Name="Cliente" EntityType="CPVCModel.Cliente" />
           <EntitySet Name="Conta" EntityType="CPVCModel.Conta" />
           <EntitySet Name="Marca" EntityType="CPVCModel.Marca" />
-          <EntitySet Name="MetodoPagamento" EntityType="CPVCModel.MetodoPagamento" />
           <EntitySet Name="OrdemServico" EntityType="CPVCModel.OrdemServico" />
-          <EntitySet Name="PrecoServico" EntityType="CPVCModel.PrecoServico" />
           <EntitySet Name="Scripts" EntityType="CPVCModel.Scripts" />
           <EntitySet Name="Servico" EntityType="CPVCModel.Servico" />
-          <EntitySet Name="sysdiagrams" EntityType="CPVCModel.sysdiagrams" />
           <EntitySet Name="TipoAparelho" EntityType="CPVCModel.TipoAparelho" />
           <EntitySet Name="Usuario" EntityType="CPVCModel.Usuario" />
-          <AssociationSet Name="FK_ServicePrice_Service" Association="CPVCModel.FK_ServicePrice_Service">
-            <End Role="Servico" EntitySet="Servico" />
-            <End Role="PrecoServico" EntitySet="PrecoServico" />
-          </AssociationSet>
           <EntitySet Name="Transacao" EntityType="CPVCModel.Transacao" />
           <AssociationSet Name="FK_Transactions_TransactionCategory" Association="CPVCModel.FK_Transactions_TransactionCategory">
             <End Role="CategoriaTransacao" EntitySet="CategoriaTransacao" />
@@ -607,7 +615,6 @@
             <End Role="Transacao" EntitySet="Transacao" />
           </AssociationSet>
           <EntitySet Name="Entrada" EntityType="CPVCModel.Entrada" />
-          <EntitySet Name="Fornecedor" EntityType="CPVCModel.Fornecedor" />
           <EntitySet Name="ItemEntrada" EntityType="CPVCModel.ItemEntrada" />
           <EntitySet Name="ItemSaida" EntityType="CPVCModel.ItemSaida" />
           <EntitySet Name="OrdemCompra" EntityType="CPVCModel.OrdemCompra" />
@@ -624,10 +631,6 @@
           <AssociationSet Name="FK_ItemEntrada_Entrada" Association="CPVCModel.FK_ItemEntrada_Entrada">
             <End Role="Entrada" EntitySet="Entrada" />
             <End Role="ItemEntrada" EntitySet="ItemEntrada" />
-          </AssociationSet>
-          <AssociationSet Name="FK_OrdemCompra_Fornecedor" Association="CPVCModel.FK_OrdemCompra_Fornecedor">
-            <End Role="Fornecedor" EntitySet="Fornecedor" />
-            <End Role="OrdemCompra" EntitySet="OrdemCompra" />
           </AssociationSet>
           <AssociationSet Name="FK_ItemEntrada_Produto" Association="CPVCModel.FK_ItemEntrada_Produto">
             <End Role="Produto" EntitySet="Produto" />
@@ -661,6 +664,22 @@
           <AssociationSet Name="FK_ModeloAparelho_TipoAparelho" Association="CPVCModel.FK_ModeloAparelho_TipoAparelho">
             <End Role="TipoAparelho" EntitySet="TipoAparelho" />
             <End Role="ModeloAparelho" EntitySet="ModeloAparelho" />
+          </AssociationSet>
+          <EntitySet Name="PrecoServico" EntityType="CPVCModel.PrecoServico" />
+          <AssociationSet Name="FK_ServicePrice_Service" Association="CPVCModel.FK_ServicePrice_Service">
+            <End Role="Servico" EntitySet="Servico" />
+            <End Role="PrecoServico" EntitySet="PrecoServico" />
+          </AssociationSet>
+          <EntitySet Name="TipoProduto" EntityType="CPVCModel.TipoProduto" />
+          <AssociationSet Name="FK_Produto_TipoProduto" Association="CPVCModel.FK_Produto_TipoProduto">
+            <End Role="TipoProduto" EntitySet="TipoProduto" />
+            <End Role="Produto" EntitySet="Produto" />
+          </AssociationSet>
+          <EntitySet Name="MetodoPagamento" EntityType="CPVCModel.MetodoPagamento" />
+          <EntitySet Name="Fornecedor" EntityType="CPVCModel.Fornecedor" />
+          <AssociationSet Name="FK_OrdemCompra_Fornecedor" Association="CPVCModel.FK_OrdemCompra_Fornecedor">
+            <End Role="Fornecedor" EntitySet="Fornecedor" />
+            <End Role="OrdemCompra" EntitySet="OrdemCompra" />
           </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
@@ -716,16 +735,6 @@
           <NavigationProperty Name="Produto" Relationship="CPVCModel.FK_Produto_Marca" FromRole="Marca" ToRole="Produto" />
           <NavigationProperty Name="ModeloAparelho" Relationship="CPVCModel.FK_ModeloAparelho_Marca" FromRole="Marca" ToRole="ModeloAparelho" />
         </EntityType>
-        <EntityType Name="MetodoPagamento">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Pagamentos" Type="Int32" Nullable="false" />
-          <Property Name="Taxa" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
-          <Property Name="Prazo" Type="Int32" Nullable="false" />
-        </EntityType>
         <EntityType Name="OrdemServico">
           <Key>
             <PropertyRef Name="Id" />
@@ -740,18 +749,6 @@
           <Property Name="IdCliente" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="CPVCModel.FK_OrdemServico_Cliente" FromRole="OrdemServico" ToRole="Cliente" />
           <NavigationProperty Name="Saida" Relationship="CPVCModel.FK_Saida_OrdemServico" FromRole="OrdemServico" ToRole="Saida" />
-        </EntityType>
-        <EntityType Name="PrecoServico">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="IdServico" Type="Int32" Nullable="false" />
-          <Property Name="DataAtualizacao" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="PrecoDinheiro" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
-          <Property Name="PrecoDebito" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="PrecoCredito" Type="Decimal" Precision="10" Scale="2" />
-          <NavigationProperty Name="Servico" Relationship="CPVCModel.FK_ServicePrice_Service" FromRole="PrecoServico" ToRole="Servico" />
         </EntityType>
         <EntityType Name="Scripts">
           <Key>
@@ -768,16 +765,6 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descricao" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="PrecoServico" Relationship="CPVCModel.FK_ServicePrice_Service" FromRole="Servico" ToRole="PrecoServico" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <EntityType Name="TipoAparelho">
           <Key>
@@ -796,18 +783,6 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Senha" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <Association Name="FK_ServicePrice_Service">
-          <End Type="CPVCModel.Servico" Role="Servico" Multiplicity="1" />
-          <End Type="CPVCModel.PrecoServico" Role="PrecoServico" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Servico">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="PrecoServico">
-              <PropertyRef Name="IdServico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="Transacao">
           <Key>
             <PropertyRef Name="Id" />
@@ -889,19 +864,6 @@
           <NavigationProperty Name="OrdemCompra" Relationship="CPVCModel.FK_Entrada_OrdemCompra" FromRole="Entrada" ToRole="OrdemCompra" />
           <NavigationProperty Name="ItemEntrada" Relationship="CPVCModel.FK_ItemEntrada_Entrada" FromRole="Entrada" ToRole="ItemEntrada" />
         </EntityType>
-        <EntityType Name="Fornecedor">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Endereco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Cnpj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="InscEstadual" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Telefone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="OrdemCompra" Relationship="CPVCModel.FK_OrdemCompra_Fornecedor" FromRole="Fornecedor" ToRole="OrdemCompra" />
-        </EntityType>
         <EntityType Name="ItemEntrada">
           <Key>
             <PropertyRef Name="Id" />
@@ -932,13 +894,13 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="DescricaoCurta" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DescricaoLonga" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescricaoLonga" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataEdicao" Type="DateTime" Precision="3" />
           <Property Name="IdFornecedor" Type="Int32" />
           <NavigationProperty Name="Entrada" Relationship="CPVCModel.FK_Entrada_OrdemCompra" FromRole="OrdemCompra" ToRole="Entrada" />
-          <NavigationProperty Name="Fornecedor" Relationship="CPVCModel.FK_OrdemCompra_Fornecedor" FromRole="OrdemCompra" ToRole="Fornecedor" />
           <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transacao_OrdemCompra" FromRole="OrdemCompra" ToRole="Transacao" />
+          <NavigationProperty Name="Fornecedor" Relationship="CPVCModel.FK_OrdemCompra_Fornecedor" FromRole="OrdemCompra" ToRole="Fornecedor" />
         </EntityType>
         <EntityType Name="Produto">
           <Key>
@@ -952,6 +914,8 @@
           <NavigationProperty Name="ItemEntrada" Relationship="CPVCModel.FK_ItemEntrada_Produto" FromRole="Produto" ToRole="ItemEntrada" />
           <NavigationProperty Name="ItemSaida" Relationship="CPVCModel.FK_ItemSaida_Produto" FromRole="Produto" ToRole="ItemSaida" />
           <NavigationProperty Name="Marca" Relationship="CPVCModel.FK_Produto_Marca" FromRole="Produto" ToRole="Marca" />
+          <Property Name="IdTipoProduto" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TipoProduto" Relationship="CPVCModel.FK_Produto_TipoProduto" FromRole="Produto" ToRole="TipoProduto" />
         </EntityType>
         <EntityType Name="Saida">
           <Key>
@@ -996,18 +960,6 @@
             </Principal>
             <Dependent Role="ItemEntrada">
               <PropertyRef Name="IdEntrada" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_OrdemCompra_Fornecedor">
-          <End Type="CPVCModel.Fornecedor" Role="Fornecedor" Multiplicity="0..1" />
-          <End Type="CPVCModel.OrdemCompra" Role="OrdemCompra" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Fornecedor">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OrdemCompra">
-              <PropertyRef Name="IdFornecedor" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1119,6 +1071,86 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="PrecoServico">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdServico" Type="Int32" Nullable="false" />
+          <Property Name="DataAtualizacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PrecoDinheiro" Type="Decimal" Nullable="false" Precision="10" Scale="2" />
+          <Property Name="PrecoDebito" Type="Decimal" Precision="10" Scale="2" />
+          <Property Name="PrecoCredito" Type="Decimal" Precision="10" Scale="2" />
+          <NavigationProperty Name="Servico" Relationship="CPVCModel.FK_ServicePrice_Service" FromRole="PrecoServico" ToRole="Servico" />
+        </EntityType>
+        <Association Name="FK_ServicePrice_Service">
+          <End Type="CPVCModel.Servico" Role="Servico" Multiplicity="1" />
+          <End Type="CPVCModel.PrecoServico" Role="PrecoServico" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Servico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="PrecoServico">
+              <PropertyRef Name="IdServico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="TipoProduto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Produto" Relationship="CPVCModel.FK_Produto_TipoProduto" FromRole="TipoProduto" ToRole="Produto" />
+        </EntityType>
+        <Association Name="FK_Produto_TipoProduto">
+          <End Type="CPVCModel.TipoProduto" Role="TipoProduto" Multiplicity="1" />
+          <End Type="CPVCModel.Produto" Role="Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TipoProduto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="IdTipoProduto" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="MetodoPagamento">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Parcelas" Type="Int32" Nullable="false" />
+          <Property Name="Taxa" Type="Decimal" Nullable="false" Precision="5" Scale="2" />
+          <Property Name="PrazoPagamento" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fornecedor">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Endereco" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cnpj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="InscEstadual" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefone" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefone2" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OrdemCompra" Relationship="CPVCModel.FK_OrdemCompra_Fornecedor" FromRole="Fornecedor" ToRole="OrdemCompra" />
+        </EntityType>
+        <Association Name="FK_OrdemCompra_Fornecedor">
+          <End Type="CPVCModel.Fornecedor" Role="Fornecedor" Multiplicity="0..1" />
+          <End Type="CPVCModel.OrdemCompra" Role="OrdemCompra" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedor">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrdemCompra">
+              <PropertyRef Name="IdFornecedor" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1189,17 +1221,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="MetodoPagamento">
-            <EntityTypeMapping TypeName="CPVCModel.MetodoPagamento">
-              <MappingFragment StoreEntitySet="MetodoPagamento">
-                <ScalarProperty Name="Prazo" ColumnName="Prazo" />
-                <ScalarProperty Name="Taxa" ColumnName="Taxa" />
-                <ScalarProperty Name="Pagamentos" ColumnName="Pagamentos" />
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="OrdemServico">
             <EntityTypeMapping TypeName="CPVCModel.OrdemServico">
               <MappingFragment StoreEntitySet="OrdemServico">
@@ -1209,18 +1230,6 @@
                 <ScalarProperty Name="DataCriacao" ColumnName="DataCriacao" />
                 <ScalarProperty Name="DescricaoLonga" ColumnName="DescricaoLonga" />
                 <ScalarProperty Name="DescricaoCurta" ColumnName="DescricaoCurta" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="PrecoServico">
-            <EntityTypeMapping TypeName="CPVCModel.PrecoServico">
-              <MappingFragment StoreEntitySet="PrecoServico">
-                <ScalarProperty Name="PrecoCredito" ColumnName="PrecoCredito" />
-                <ScalarProperty Name="PrecoDebito" ColumnName="PrecoDebito" />
-                <ScalarProperty Name="PrecoDinheiro" ColumnName="PrecoDinheiro" />
-                <ScalarProperty Name="DataAtualizacao" ColumnName="DataAtualizacao" />
-                <ScalarProperty Name="IdServico" ColumnName="IdServico" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1239,17 +1248,6 @@
               <MappingFragment StoreEntitySet="Servico">
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="CPVCModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="definition" ColumnName="definition" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="name" ColumnName="name" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1299,19 +1297,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Fornecedor">
-            <EntityTypeMapping TypeName="CPVCModel.Fornecedor">
-              <MappingFragment StoreEntitySet="Fornecedor">
-                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
-                <ScalarProperty Name="InscEstadual" ColumnName="InscEstadual" />
-                <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
-                <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="ItemEntrada">
             <EntityTypeMapping TypeName="CPVCModel.ItemEntrada">
               <MappingFragment StoreEntitySet="ItemEntrada">
@@ -1349,6 +1334,7 @@
           <EntitySetMapping Name="Produto">
             <EntityTypeMapping TypeName="CPVCModel.Produto">
               <MappingFragment StoreEntitySet="Produto">
+                <ScalarProperty Name="IdTipoProduto" ColumnName="IdTipoProduto" />
                 <ScalarProperty Name="IdMarca" ColumnName="IdMarca" />
                 <ScalarProperty Name="Sku" ColumnName="Sku" />
                 <ScalarProperty Name="QtdeMinima" ColumnName="QtdeMinima" />
@@ -1373,6 +1359,51 @@
                 <ScalarProperty Name="IdTipoAparelho" ColumnName="IdTipoAparelho" />
                 <ScalarProperty Name="NumeroModelo" ColumnName="NumeroModelo" />
                 <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PrecoServico">
+            <EntityTypeMapping TypeName="CPVCModel.PrecoServico">
+              <MappingFragment StoreEntitySet="PrecoServico">
+                <ScalarProperty Name="PrecoCredito" ColumnName="PrecoCredito" />
+                <ScalarProperty Name="PrecoDebito" ColumnName="PrecoDebito" />
+                <ScalarProperty Name="PrecoDinheiro" ColumnName="PrecoDinheiro" />
+                <ScalarProperty Name="DataAtualizacao" ColumnName="DataAtualizacao" />
+                <ScalarProperty Name="IdServico" ColumnName="IdServico" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TipoProduto">
+            <EntityTypeMapping TypeName="CPVCModel.TipoProduto">
+              <MappingFragment StoreEntitySet="TipoProduto">
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MetodoPagamento">
+            <EntityTypeMapping TypeName="CPVCModel.MetodoPagamento">
+              <MappingFragment StoreEntitySet="MetodoPagamento">
+                <ScalarProperty Name="PrazoPagamento" ColumnName="PrazoPagamento" />
+                <ScalarProperty Name="Taxa" ColumnName="Taxa" />
+                <ScalarProperty Name="Parcelas" ColumnName="Parcelas" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fornecedor">
+            <EntityTypeMapping TypeName="CPVCModel.Fornecedor">
+              <MappingFragment StoreEntitySet="Fornecedor">
+                <ScalarProperty Name="Telefone2" ColumnName="Telefone2" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="InscEstadual" ColumnName="InscEstadual" />
+                <ScalarProperty Name="Cnpj" ColumnName="Cnpj" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -25,16 +25,16 @@ namespace ConsertoPraVoce.Model
             public string Descricao { get; set; }
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
-            [DisplayName("Pagamentos")]
-            public int Pagamentos { get; set; }
+            [DisplayName("Parcelas")]
+            public int Parcelas { get; set; }
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
             [DisplayName("Pagamentos")]
             public int Taxa { get; set; }
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
-            [DisplayName("Prazo")]
-            public int Prazo { get; set; }
+            [DisplayName("Prazo de Pagamento")]
+            public int PrazoPagamento { get; set; }
 
         }
 

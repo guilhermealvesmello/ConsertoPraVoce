@@ -26,11 +26,13 @@ namespace ConsertoPraVoce.Model
         public Nullable<int> QtdeMinima { get; set; }
         public string Sku { get; set; }
         public Nullable<int> IdMarca { get; set; }
+        public int IdTipoProduto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemEntrada> ItemEntrada { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemSaida> ItemSaida { get; set; }
         public virtual Marca Marca { get; set; }
+        public virtual TipoProduto TipoProduto { get; set; }
     }
 }

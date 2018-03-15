@@ -27,6 +27,7 @@ namespace ConsertoPraVoce.Model
         public string Cnpj { get; set; }
         public string InscEstadual { get; set; }
         public string Telefone { get; set; }
+        public string Telefone2 { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdemCompra> OrdemCompra { get; set; }

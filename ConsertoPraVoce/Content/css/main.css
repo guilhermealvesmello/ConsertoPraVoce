@@ -1957,7 +1957,9 @@ ul.recent-tweets {
   height: 15px; }
 
 .form-horizontal .has-feedback .form-control-feedback {
-  top: 11px; }
+	max-width: 650px;
+	top: 11px; }
+
 
 .has-success .help-block, .has-success .control-label, .has-success .radio, .has-success .checkbox, .has-success .radio-inline, .has-success .checkbox-inline {
   color: #009688; }

@@ -14,8 +14,15 @@ namespace ConsertoPraVoce.Controllers
     {
         private CPVCEntities db = new CPVCEntities();
 
-        // GET: PrecoServico
-        public ActionResult Index()
+		private PrecoServico LoadDefaultParameters()
+		{
+			var srv = new PrecoServico();
+			srv.DataAtualizacao = DateTime.Now;
+			return srv;
+		}
+
+		// GET: PrecoServico
+		public ActionResult Index()
         {
             var precoServico = db.PrecoServico.Include(p => p.Servico);
             return View(precoServico.ToList());
@@ -39,8 +46,9 @@ namespace ConsertoPraVoce.Controllers
         // GET: PrecoServico/Create
         public ActionResult Create()
         {
-            ViewBag.IdServico = new SelectList(db.Servico, "Id", "Descricao");
-            return View();
+			var srv = LoadDefaultParameters();
+            ViewBag.IdServico = new SelectList(BuscarServicosNaoCadastrados(), "Id", "Descricao");
+            return View(srv);
         }
 
         // POST: PrecoServico/Create
@@ -57,9 +65,19 @@ namespace ConsertoPraVoce.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.IdServico = new SelectList(db.Servico, "Id", "Descricao", precoServico.IdServico);
+            ViewBag.IdServico = new SelectList(BuscarServicosNaoCadastrados(), "Id", "Descricao", precoServico.IdServico);
             return View(precoServico);
         }
+
+		private List<Servico> BuscarServicosNaoCadastrados()
+		{
+			var cadastrados = db.PrecoServico.Select(c => c.IdServico);
+			if (cadastrados != null)
+			{
+				return db.Servico.Where(c => !cadastrados.Contains(c.Id)).ToList();
+			}
+			return db.Servico.ToList();
+		}
 
         // GET: PrecoServico/Edit/5
         public ActionResult Edit(int? id)

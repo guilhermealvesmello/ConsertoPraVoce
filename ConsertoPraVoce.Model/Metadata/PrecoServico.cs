@@ -20,7 +20,7 @@ namespace ConsertoPraVoce.Model
             public int Id { get; set; }
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
-            [DisplayName("Código do Seviço")]
+            [DisplayName("Seviço")]
             public int IdServico { get; set; }
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
@@ -31,19 +31,19 @@ namespace ConsertoPraVoce.Model
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
             [DisplayName("Preço em Dinheiro")]
-			[DataType(DataType.Currency)]
-			[DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = true)]
+			[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+			//[DisplayFormat(DataFormatString = "{0:C0,00}", ApplyFormatInEditMode = true)]
 			public decimal PrecoDinheiro { get; set; }
 
             [DisplayName("Preço no Débito")]
-			[DataType(DataType.Currency)]
-			[DisplayFormat(DataFormatString = "{0:C0}", ApplyFormatInEditMode = true)]
+			[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+			//[DisplayFormat(DataFormatString = "{0:C0,00}", ApplyFormatInEditMode = true)]
 			public decimal PrecoDebito { get; set; }
 
             [DisplayName("Preço no Crédito")]
-			[DataType(DataType.Currency)]
-			[UIHint("Currency")]
-			[DisplayFormat(DataFormatString ="{0:C0}", ApplyFormatInEditMode = true)]
+			[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+			//[UIHint("Currency")]
+			//[DisplayFormat(DataFormatString = "{0:C0,00}", ApplyFormatInEditMode = true)]
 			public decimal PrecoCredito { get; set; }
 
         }

@@ -20,17 +20,18 @@
 						<thead>
 							<tr>
 								<th>
-									@Html.DisplayNameFor(model => model.Descricao)
-								</th>
-								<th>
-									@Html.DisplayNameFor(model => model.NumeroModelo)
-								</th>
-								<th>
 									@Html.DisplayNameFor(model => model.Marca.Descricao)
 								</th>
 								<th>
 									@Html.DisplayNameFor(model => model.TipoAparelho.Descricao)
 								</th>
+								<th>
+									@Html.DisplayNameFor(model => model.Descricao)
+								</th>
+								<th>
+									@Html.DisplayNameFor(model => model.NumeroModelo)
+								</th>
+								
 								<th></th>
 							</tr>
 						</thead>
@@ -40,20 +41,20 @@
 							{
 								<tr>
 									<td>
-										@Html.DisplayFor(modelItem => item.Descricao)
-									</td>
-									<td>
-										@Html.DisplayFor(modelItem => item.NumeroModelo)
-									</td>
-									<td>
 										@Html.DisplayFor(modelItem => item.Marca.Descricao)
 									</td>
 									<td>
 										@Html.DisplayFor(modelItem => item.TipoAparelho.Descricao)
 									</td>
 									<td>
+										@Html.DisplayFor(modelItem => item.Descricao)
+									</td>
+									<td>
+										@Html.DisplayFor(modelItem => item.NumeroModelo)
+									</td>									
+									<td>										
 										@Html.ActionLink("Editar", "Edit", new { id = item.Id }) |
-										@Html.ActionLink("Detalhes", "Details", new { id = item.Id }) |
+										@*@Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "" }) |*@
 										@Html.ActionLink("Deletar", "Delete", new { id = item.Id })
 									</td>
 								</tr>

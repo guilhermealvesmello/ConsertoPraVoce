@@ -1,0 +1,24 @@
+﻿@model decimal?
+
+@{
+	var name = Html.ViewContext.ViewData.TemplateInfo.GetFullHtmlFieldName(string.Empty);
+	var id = System.Text.RegularExpressions.Regex.Replace(name, @"[^-\w\d:_]", HtmlHelper.IdAttributeDotReplacement) + "2";
+	var idOriginal = System.Text.RegularExpressions.Regex.Replace(name, @"[^-\w\d:_]", HtmlHelper.IdAttributeDotReplacement);
+}
+
+<script type="text/javascript">
+
+	$(document).ready(function () {
+		@*$("#@idOriginal").mask('#,##%', { reverse: true });*@
+		$("#@idOriginal").priceFormat({
+			prefix: '',
+			centsSeparator: ',',
+			thousandsSeparator: '.'
+		});
+
+	});
+
+</script>
+
+
+@Html.TextBox("", Model.HasValue ? Model.Value.ToString("c").Replace("R$ ", "") : "", new { @class = "form-control", @style = "text-align: right;" })

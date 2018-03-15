@@ -82,6 +82,8 @@
 	<!-- Custom Data tables -->
 	<script src="~/Content/js/datatables/custom-datatables.js"></script>
 
+	<script src="~/Content/js/priceFormat/jquery.priceformat.js"></script>
+
 </head>
 <body>
 
@@ -272,7 +274,7 @@
 						<li>
 							<a href="profile.html"> <i class="fa fa-calendar"></i> Appointments</a>
 						</li>
-						<hr class="less-margin">
+						@*<hr class="less-margin">*@
 						<li>
 							<a href="#"> <i class="fa fa-sun-o"></i> Account Settings</a>
 						</li>
@@ -319,6 +321,12 @@
 					</ul>
 				</li>
 				<li>
+					<a href="@Url.Action("Index", "Fornecedor")">
+						<i class="fa fa-handshake-o"></i>
+						<span>Fornecedores</span>
+					</a>
+				</li>
+				<li>
 					<a href="@Url.Action("Index", "Cliente")">
 						<i class="fa fa-handshake-o"></i>
 						<span>Clientes</span>
@@ -360,6 +368,12 @@
 						<span>Serviços</span>
 					</a>
 				</li>
+				<li>
+					<a href="@Url.Action("Index", "TipoProduto")">
+						<i class="fa fa-wrench"></i>
+						<span>Tipo de Produtos</span>
+					</a>
+				</li>				
 				<li>
 					<a href="@Url.Action("Index", "ModeloAparelho")">
 						<i class="fa fa-mobile"></i>
