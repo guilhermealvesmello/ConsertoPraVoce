@@ -25,14 +25,16 @@ namespace ConsertoPraVoce.Model
         public string Descricao { get; set; }
         public Nullable<int> QtdeMinima { get; set; }
         public string Sku { get; set; }
-        public Nullable<int> IdMarca { get; set; }
         public int IdTipoProduto { get; set; }
+        public int IdModeloAparelho { get; set; }
+        public Nullable<int> IdCor { get; set; }
     
+        public virtual Cor Cor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemEntrada> ItemEntrada { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemSaida> ItemSaida { get; set; }
-        public virtual Marca Marca { get; set; }
+        public virtual ModeloAparelho ModeloAparelho { get; set; }
         public virtual TipoProduto TipoProduto { get; set; }
     }
 }

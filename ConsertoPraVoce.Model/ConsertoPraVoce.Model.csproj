@@ -88,6 +88,9 @@
     <Compile Include="Conta.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Cor.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="CPVC.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

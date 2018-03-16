@@ -1,0 +1,67 @@
+﻿@using ConsertoPraVoce.Helpers
+<ul>
+	@*<li class="highlight">
+			<a href='index.html'>
+				<i class="fa fa-desktop"></i>
+				<span>Dashboard</span>
+				<span class="current-page"></span>
+			</a>
+		</li>
+		<li>
+			<a href='analytics.html'>
+				<i class="fa fa-bar-chart-o"></i>
+				<span>Analytics</span>
+			</a>
+		</li>*@
+	<li class='has-sub'>
+		<a href='#'>
+			<i class="fa fa-columns"></i>
+			<span>Categorias</span>
+		</a>
+		<ul>
+			@Html.MenuItem("Index", "CategoriaTransacao", "Transação", "fa fa-list-ul")
+		</ul>
+	</li>
+
+	@Html.MenuItem("Index", "Fornecedor", "Fornecedores", "fa fa-handshake-o")
+	@Html.MenuItem("Index", "Cliente", "Clientes", "fa fa-handshake-o")
+	@Html.MenuItem("Index", "Conta", "Contas", "fa fa-bank")
+	@Html.MenuItem("Index", "Marca", "Marcas", "fa fa-trademark")
+	@*@Html.MenuItem("Index", "MetodoPagamento", "Pagamentos", "fa credit-card")*@
+
+	<li class='has-sub'>
+		<a href='#'>
+			<i class="fa fa-columns"></i>
+			<span>Serviços</span>
+		</a>
+		<ul>
+			@Html.MenuItem("Index", "OrdemServico", "Ordens de Serviço", "fa-check-square-o")
+			@Html.MenuItem("Index", "PrecoServico", "Preços de Serviço", "fa fa-money")
+			@Html.MenuItem("Index", "Servico", "Serviços", "fa fa-wrench")
+		</ul>
+	</li>
+	<li class='has-sub'>
+		<a href='#'>
+			<i class="fa fa-columns"></i>
+			<span>Produtos</span>
+		</a>
+		<ul>
+			@Html.MenuItem("Index", "Produto", "Produtos", "fa fa-wrench")
+			@Html.MenuItem("Index", "TipoProduto", "Tipos", "fa fa-wrench")
+			@Html.MenuItem("Index", "Cor", "Cores", "fa fa-wrench")
+		</ul>
+	</li>
+	<li class='has-sub'>
+		<a href='#'>
+			<i class="fa fa-mobile"></i>
+			<span>Aparelhos</span>
+		</a>
+		<ul>
+			@Html.MenuItem("Index", "TipoAparelho", "Tipos", "fa fa-mobile")
+			@Html.MenuItem("Index", "ModeloAparelho", "Modelos", "fa fa-mobile")
+		</ul>
+	</li>
+
+	@Html.MenuItem("Index", "Transacao", "Transações", "fa fa-retweet")
+	@Html.MenuItem("Index", "Usuario", "Usuários", "fa fa-user")	
+</ul>

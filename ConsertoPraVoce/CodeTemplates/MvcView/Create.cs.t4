@@ -72,7 +72,7 @@ if (ReferenceScriptLibraries) {
 <#
 }
 #>
-@using (Html.BeginForm("<#= ViewName#>", "<#= ViewDataTypeShortName #>", FormMethod.Post, new { @class = "form-horizontal" })) 
+@using (Html.BeginForm("<#= ViewName#>", "<#= ViewDataTypeShortName #>", FormMethod.Post, new { @class = "form-horizontal", @style= "max-width: 800px;" })) 
 {
     @Html.AntiForgeryToken()
     
@@ -187,18 +187,16 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
         </div>
 		</fieldset>
     </div>
-}
-
 <div>
     @Html.ActionLink("Voltar à Lista", "Index")
 </div>
+}
+
+
 <#
 if(IsLayoutPageSelected && ReferenceScriptLibraries && IsBundleConfigPresent) {
 #>
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 <#
 }
 #>

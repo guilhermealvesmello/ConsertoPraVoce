@@ -234,6 +234,7 @@
     <Compile Include="Controllers\CategoriaTransacaoController.cs" />
     <Compile Include="Controllers\ClienteController.cs" />
     <Compile Include="Controllers\ContaController.cs" />
+    <Compile Include="Controllers\CorController.cs" />
     <Compile Include="Controllers\FornecedorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -242,6 +243,7 @@
     <Compile Include="Controllers\ModeloAparelhoController.cs" />
     <Compile Include="Controllers\OrdemServicoController.cs" />
     <Compile Include="Controllers\PrecoServicoController.cs" />
+    <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\ScriptsController.cs" />
     <Compile Include="Controllers\ServicoController.cs" />
     <Compile Include="Controllers\TipoAparelhoController.cs" />
@@ -251,6 +253,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\MenuLink.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -646,6 +649,17 @@
     <Content Include="Views\Fornecedor\Details.cshtml" />
     <Content Include="Views\Fornecedor\Edit.cshtml" />
     <Content Include="Views\Fornecedor\Index.cshtml" />
+    <Content Include="Views\Produto\Create.cshtml" />
+    <Content Include="Views\Produto\Delete.cshtml" />
+    <Content Include="Views\Produto\Details.cshtml" />
+    <Content Include="Views\Produto\Edit.cshtml" />
+    <Content Include="Views\Produto\Index.cshtml" />
+    <Content Include="Views\Cor\Create.cshtml" />
+    <Content Include="Views\Cor\Delete.cshtml" />
+    <Content Include="Views\Cor\Details.cshtml" />
+    <Content Include="Views\Cor\Edit.cshtml" />
+    <Content Include="Views\Cor\Index.cshtml" />
+    <Content Include="Views\Shared\_SideMenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

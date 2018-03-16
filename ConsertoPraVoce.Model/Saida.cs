@@ -22,7 +22,6 @@ namespace ConsertoPraVoce.Model
     
         public int Id { get; set; }
         public Nullable<int> IdOrdemServico { get; set; }
-        public int Total { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ItemSaida> ItemSaida { get; set; }

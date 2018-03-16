@@ -14,6 +14,13 @@ namespace ConsertoPraVoce.Model
     
     public partial class ModeloAparelho
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ModeloAparelho()
+        {
+            this.Cliente = new HashSet<Cliente>();
+            this.Produto = new HashSet<Produto>();
+        }
+    
         public int Id { get; set; }
         public string Descricao { get; set; }
         public string NumeroModelo { get; set; }
@@ -22,5 +29,9 @@ namespace ConsertoPraVoce.Model
     
         public virtual Marca Marca { get; set; }
         public virtual TipoAparelho TipoAparelho { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cliente> Cliente { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Produto> Produto { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace ConsertoPraVoce.Model
         public int IdProduto { get; set; }
         public int IdEntrada { get; set; }
         public int Valor { get; set; }
-        public int Quantidade { get; set; }
+        public System.DateTime DataEntrada { get; set; }
     
         public virtual Entrada Entrada { get; set; }
         public virtual Produto Produto { get; set; }

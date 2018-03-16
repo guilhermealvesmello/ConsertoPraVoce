@@ -76,7 +76,7 @@ if (ReferenceScriptLibraries) {
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
+    <div class="form-horizontal" style="max-width: 800px;">
         <h4><#= ViewDataTypeShortName #></h4>
         <hr />
 <# 
@@ -186,18 +186,16 @@ foreach (PropertyMetadata property in ModelMetadata.Properties) {
             </div>
         </div>
     </div>
-}
-
 <div>
     @Html.ActionLink("Voltar à Lista", "Index")
 </div>
+
+}
+
+
 <#
 if(IsLayoutPageSelected && ReferenceScriptLibraries && IsBundleConfigPresent) {
 #>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
 <#
 }
 #>

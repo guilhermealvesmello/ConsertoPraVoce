@@ -29,10 +29,12 @@ namespace ConsertoPraVoce.Model
         public Nullable<System.DateTime> DataNascimento { get; set; }
         public string Notas { get; set; }
         public Nullable<System.DateTime> Data { get; set; }
+        public Nullable<int> IdModeloAparelho { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transacao> Transacao { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdemServico> OrdemServico { get; set; }
+        public virtual ModeloAparelho ModeloAparelho { get; set; }
     }
 }

@@ -21,7 +21,6 @@ namespace ConsertoPraVoce.Model
         }
     
         public int Id { get; set; }
-        public int Total { get; set; }
         public Nullable<int> IdOrdemCompra { get; set; }
     
         public virtual OrdemCompra OrdemCompra { get; set; }
