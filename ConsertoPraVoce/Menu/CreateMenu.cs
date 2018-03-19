@@ -44,7 +44,12 @@ namespace ConsertoPraVoce.Menu
 			apa.SubMenu.Add(CriarMenu("Index", "ModeloAparelho", "Modelos", ""));
 			menu.Add(apa);
 
-			menu.Add(CriarMenu("Index", "Transacao", "Transações", "fa fa-retweet"));
+			var tra = CriarMenu("", "", "Transações", "fa fa-retweet", "has-sub");
+			tra.SubMenu.Add(CriarMenu("Index", "Transacao", "Transações", ""));
+			tra.SubMenu.Add(CriarMenu("Index", "CategoriaTransacao", "Categorias", ""));
+			tra.SubMenu.Add(CriarMenu("Index", "MetodoPagamento", "Metodo Pagamento", ""));
+			menu.Add(tra);
+
 			menu.Add(CriarMenu("Index", "Usuario", "Usuários", "fa fa-user"));
 
 			return menu;

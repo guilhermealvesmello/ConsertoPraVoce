@@ -16,13 +16,27 @@
         <dd>
             @Html.DisplayFor(model => model.Descricao)
         </dd>
+		<dt>
+			@Html.DisplayNameFor(model => model.TipoDespesa)
+		</dt>
 
+		<dd>
+			@Html.DisplayFor(model => model.TipoDespesa)
+		</dd>
         <dt>
             @Html.DisplayNameFor(model => model.DescricaoLonga)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.DescricaoLonga)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CategoriaTransacao2.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CategoriaTransacao2.Descricao)
         </dd>
 
     </dl>

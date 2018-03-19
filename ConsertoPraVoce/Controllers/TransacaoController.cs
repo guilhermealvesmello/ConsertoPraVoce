@@ -17,7 +17,7 @@ namespace ConsertoPraVoce.Controllers
         // GET: Transacao
         public ActionResult Index()
         {
-            var transacao = db.Transacao.Include(t => t.CategoriaTransacao).Include(t => t.Cliente).Include(t => t.Conta).Include(t => t.OrdemServico);
+            var transacao = db.Transacao.Include(t => t.CategoriaTransacao).Include(t => t.Cliente).Include(t => t.Conta).Include(t => t.OrdemCompra).Include(t => t.OrdemServico);
             return View(transacao.ToList());
         }
 
@@ -42,6 +42,8 @@ namespace ConsertoPraVoce.Controllers
             ViewBag.IdCategoriaTransacao = new SelectList(db.CategoriaTransacao, "Id", "Descricao");
             ViewBag.IdCliente = new SelectList(db.Cliente, "Id", "Nome");
             ViewBag.IdConta = new SelectList(db.Conta, "Id", "Descricao");
+            //ViewBag.IdMetodoPagamento = new SelectList(db.MetodoPagamento, "Id", "Descricao");
+            ViewBag.IdOrdemCompra = new SelectList(db.OrdemCompra, "Id", "DescricaoCurta");
             ViewBag.IdOrdemServico = new SelectList(db.OrdemServico, "Id", "DescricaoCurta");
             return View();
         }
@@ -51,8 +53,9 @@ namespace ConsertoPraVoce.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,DataTransacao,Descricao,ValorBruto,ValorLiquido,IdCategoriaTransacao,IdCliente,PagamentoEfetuado,Detalhes,IdConta,IdOrdemServico,TipoEntrada")] Transacao transacao)
+        public ActionResult Create([Bind(Include = "Id,DataTransacao,Descricao,ValorBruto,IdCategoriaTransacao,IdCliente,PagamentoRecorrente,Detalhes,IdConta,IdOrdemServico,IdOrdemCompra,Parcelas")] Transacao transacao)
         {
+			transacao.DataModificacao = DateTime.Now;
             if (ModelState.IsValid)
             {
                 db.Transacao.Add(transacao);
@@ -63,6 +66,8 @@ namespace ConsertoPraVoce.Controllers
             ViewBag.IdCategoriaTransacao = new SelectList(db.CategoriaTransacao, "Id", "Descricao", transacao.IdCategoriaTransacao);
             ViewBag.IdCliente = new SelectList(db.Cliente, "Id", "Nome", transacao.IdCliente);
             ViewBag.IdConta = new SelectList(db.Conta, "Id", "Descricao", transacao.IdConta);
+            //ViewBag.IdMetodoPagamento = new SelectList(db.MetodoPagamento, "Id", "Descricao", transacao.IdMetodoPagamento);
+            ViewBag.IdOrdemCompra = new SelectList(db.OrdemCompra, "Id", "DescricaoCurta", transacao.IdOrdemCompra);
             ViewBag.IdOrdemServico = new SelectList(db.OrdemServico, "Id", "DescricaoCurta", transacao.IdOrdemServico);
             return View(transacao);
         }
@@ -82,6 +87,8 @@ namespace ConsertoPraVoce.Controllers
             ViewBag.IdCategoriaTransacao = new SelectList(db.CategoriaTransacao, "Id", "Descricao", transacao.IdCategoriaTransacao);
             ViewBag.IdCliente = new SelectList(db.Cliente, "Id", "Nome", transacao.IdCliente);
             ViewBag.IdConta = new SelectList(db.Conta, "Id", "Descricao", transacao.IdConta);
+            //ViewBag.IdMetodoPagamento = new SelectList(db.MetodoPagamento, "Id", "Descricao", transacao.IdMetodoPagamento);
+            ViewBag.IdOrdemCompra = new SelectList(db.OrdemCompra, "Id", "DescricaoCurta", transacao.IdOrdemCompra);
             ViewBag.IdOrdemServico = new SelectList(db.OrdemServico, "Id", "DescricaoCurta", transacao.IdOrdemServico);
             return View(transacao);
         }
@@ -91,9 +98,10 @@ namespace ConsertoPraVoce.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,DataTransacao,Descricao,ValorBruto,ValorLiquido,IdCategoriaTransacao,IdCliente,PagamentoEfetuado,Detalhes,IdConta,IdOrdemServico,TipoEntrada")] Transacao transacao)
+        public ActionResult Edit([Bind(Include = "Id,DataTransacao,Descricao,ValorBruto,IdCategoriaTransacao,IdCliente,PagamentoRecorrente,Detalhes,IdConta,IdOrdemServico,IdOrdemCompra,Parcelas")] Transacao transacao)
         {
-            if (ModelState.IsValid)
+			transacao.DataModificacao = DateTime.Now;
+			if (ModelState.IsValid)
             {
                 db.Entry(transacao).State = EntityState.Modified;
                 db.SaveChanges();
@@ -102,6 +110,8 @@ namespace ConsertoPraVoce.Controllers
             ViewBag.IdCategoriaTransacao = new SelectList(db.CategoriaTransacao, "Id", "Descricao", transacao.IdCategoriaTransacao);
             ViewBag.IdCliente = new SelectList(db.Cliente, "Id", "Nome", transacao.IdCliente);
             ViewBag.IdConta = new SelectList(db.Conta, "Id", "Descricao", transacao.IdConta);
+            //ViewBag.IdMetodoPagamento = new SelectList(db.MetodoPagamento, "Id", "Descricao", transacao.IdMetodoPagamento);
+            ViewBag.IdOrdemCompra = new SelectList(db.OrdemCompra, "Id", "DescricaoCurta", transacao.IdOrdemCompra);
             ViewBag.IdOrdemServico = new SelectList(db.OrdemServico, "Id", "DescricaoCurta", transacao.IdOrdemServico);
             return View(transacao);
         }

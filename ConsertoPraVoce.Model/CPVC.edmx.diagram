@@ -5,39 +5,32 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="667e8c729f27478a8a554e5eb43ca0a6" Name="Diagram1">
-        <EntityTypeShape EntityType="CPVCModel.CategoriaTransacao" Width="1.5" PointX="0.75" PointY="11.625" />
-        <EntityTypeShape EntityType="CPVCModel.Cliente" Width="1.5" PointX="0.75" PointY="8.125" />
-        <EntityTypeShape EntityType="CPVCModel.Conta" Width="1.5" PointX="0.75" PointY="5.625" />
-        <EntityTypeShape EntityType="CPVCModel.Marca" Width="1.5" PointX="5.75" PointY="4.75" />
-        <EntityTypeShape EntityType="CPVCModel.OrdemServico" Width="1.5" PointX="0.75" PointY="1.875" />
-        <EntityTypeShape EntityType="CPVCModel.Scripts" Width="1.5" PointX="7.75" PointY="4.75" />
-        <EntityTypeShape EntityType="CPVCModel.Servico" Width="1.5" PointX="5.75" PointY="1.375" />
-        <EntityTypeShape EntityType="CPVCModel.TipoAparelho" Width="1.5" PointX="6.75" PointY="7.75" />
-        <EntityTypeShape EntityType="CPVCModel.Usuario" Width="1.5" PointX="8.75" PointY="7.75" />
-        <EntityTypeShape EntityType="CPVCModel.Transacao" Width="1.5" PointX="3.5" PointY="1.625" />
-        <AssociationConnector Association="CPVCModel.FK_Transactions_TransactionCategory" />
-        <AssociationConnector Association="CPVCModel.FK_Transactions_Client" />
-        <AssociationConnector Association="CPVCModel.FK_Transactions_Account" />
-        <AssociationConnector Association="CPVCModel.FK_Transactions_ServiceOrder" />
-        <EntityTypeShape EntityType="CPVCModel.OrdemCompra" Width="1.5" PointX="5.75" PointY="14.375" />
+        <EntityTypeShape EntityType="CPVCModel.Cliente" Width="1.5" PointX="5.25" PointY="11" />
+        <EntityTypeShape EntityType="CPVCModel.Conta" Width="1.5" PointX="10.5" PointY="14.5" />
+        <EntityTypeShape EntityType="CPVCModel.Marca" Width="1.5" PointX="0.75" PointY="7.875" />
+        <EntityTypeShape EntityType="CPVCModel.OrdemServico" Width="1.5" PointX="7.5" PointY="11.25" />
+        <EntityTypeShape EntityType="CPVCModel.Scripts" Width="1.5" PointX="9.75" PointY="5.875" />
+        <EntityTypeShape EntityType="CPVCModel.Servico" Width="1.5" PointX="7.75" PointY="2.375" />
+        <EntityTypeShape EntityType="CPVCModel.TipoAparelho" Width="1.5" PointX="0.75" PointY="4.875" />
+        <EntityTypeShape EntityType="CPVCModel.Usuario" Width="1.5" PointX="11.75" PointY="5.875" />
+        <EntityTypeShape EntityType="CPVCModel.OrdemCompra" Width="1.5" PointX="3" PointY="1.125" />
         <AssociationConnector Association="CPVCModel.FK_OrdemServico_Cliente" />
-        <AssociationConnector Association="CPVCModel.FK_Transacao_OrdemCompra" />
-        <EntityTypeShape EntityType="CPVCModel.ModeloAparelho" Width="1.5" PointX="11" PointY="5.875" />
+        <EntityTypeShape EntityType="CPVCModel.ModeloAparelho" Width="1.5" PointX="3" PointY="7.25" />
         <AssociationConnector Association="CPVCModel.FK_ModeloAparelho_Marca" />
         <AssociationConnector Association="CPVCModel.FK_ModeloAparelho_TipoAparelho" />
-        <EntityTypeShape EntityType="CPVCModel.PrecoServico" Width="1.5" PointX="8" PointY="1" />
+        <EntityTypeShape EntityType="CPVCModel.PrecoServico" Width="1.5" PointX="10" PointY="2" />
         <AssociationConnector Association="CPVCModel.FK_ServicePrice_Service" />
-        <EntityTypeShape EntityType="CPVCModel.TipoProduto" Width="1.5" PointX="10.375" PointY="0.875" />
-        <EntityTypeShape EntityType="CPVCModel.MetodoPagamento" Width="1.5" PointX="3.375" PointY="10.75" />
-        <EntityTypeShape EntityType="CPVCModel.Fornecedor" Width="1.5" PointX="3.5" PointY="14.375" />
+        <EntityTypeShape EntityType="CPVCModel.TipoProduto" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="CPVCModel.MetodoPagamento" Width="1.5" PointX="12.75" PointY="1.875" />
+        <EntityTypeShape EntityType="CPVCModel.Fornecedor" Width="1.5" PointX="0.75" PointY="1" />
         <AssociationConnector Association="CPVCModel.FK_OrdemCompra_Fornecedor" />
         <AssociationConnector Association="CPVCModel.FK_Cliente_ModeloAparelho" />
-        <EntityTypeShape EntityType="CPVCModel.Cor" Width="1.5" PointX="11.375" PointY="10.875" />
-        <EntityTypeShape EntityType="CPVCModel.Entrada" Width="1.5" PointX="13.625" PointY="0.75" />
-        <EntityTypeShape EntityType="CPVCModel.ItemEntrada" Width="1.5" PointX="15.875" PointY="2.5" />
-        <EntityTypeShape EntityType="CPVCModel.ItemSaida" Width="1.5" PointX="15.875" PointY="5.75" />
-        <EntityTypeShape EntityType="CPVCModel.Produto" Width="1.5" PointX="13.625" PointY="4" />
-        <EntityTypeShape EntityType="CPVCModel.Saida" Width="1.5" PointX="3.375" PointY="8.375" />
+        <EntityTypeShape EntityType="CPVCModel.Cor" Width="1.5" PointX="3" PointY="11" />
+        <EntityTypeShape EntityType="CPVCModel.Entrada" Width="1.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="CPVCModel.ItemEntrada" Width="1.5" PointX="7.5" PointY="7.5" />
+        <EntityTypeShape EntityType="CPVCModel.ItemSaida" Width="1.5" PointX="12" PointY="9" />
+        <EntityTypeShape EntityType="CPVCModel.Produto" Width="1.5" PointX="5.25" PointY="7" />
+        <EntityTypeShape EntityType="CPVCModel.Saida" Width="1.5" PointX="9.75" PointY="11.875" />
         <AssociationConnector Association="CPVCModel.FK_Produto_Cor" />
         <AssociationConnector Association="CPVCModel.FK_Entrada_OrdemCompra" />
         <AssociationConnector Association="CPVCModel.FK_ItemEntrada_Entrada" />
@@ -47,7 +40,15 @@
         <AssociationConnector Association="CPVCModel.FK_Produto_ModeloAparelho" />
         <AssociationConnector Association="CPVCModel.FK_Saida_OrdemServico" />
         <AssociationConnector Association="CPVCModel.FK_Produto_TipoProduto" />
-      </Diagram>
+        <EntityTypeShape EntityType="CPVCModel.CategoriaTransacao" Width="1.5" PointX="0.75" PointY="14" />
+        <AssociationConnector Association="CPVCModel.FK_CategoriaTransacao_CategoriaTransacao" />
+        <EntityTypeShape EntityType="CPVCModel.Transacao" Width="1.5" PointX="14.75" PointY="8.625" />
+        <AssociationConnector Association="CPVCModel.FK_Transacao_CategoriaTransacao" />
+        <AssociationConnector Association="CPVCModel.FK_Transacao_Cliente" />
+        <AssociationConnector Association="CPVCModel.FK_Transacao_Conta" />
+        <AssociationConnector Association="CPVCModel.FK_Transacao_OrdemCompra" />
+        <AssociationConnector Association="CPVCModel.FK_Transacao_OrdemServico" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

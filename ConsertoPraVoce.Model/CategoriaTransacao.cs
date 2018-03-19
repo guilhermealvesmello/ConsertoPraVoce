@@ -17,13 +17,19 @@ namespace ConsertoPraVoce.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public CategoriaTransacao()
         {
+            this.CategoriaTransacao1 = new HashSet<CategoriaTransacao>();
             this.Transacao = new HashSet<Transacao>();
         }
     
         public int Id { get; set; }
         public string Descricao { get; set; }
         public string DescricaoLonga { get; set; }
+        public Nullable<int> IdCategoriaPai { get; set; }
+        public string TipoDespesa { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CategoriaTransacao> CategoriaTransacao1 { get; set; }
+        public virtual CategoriaTransacao CategoriaTransacao2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transacao> Transacao { get; set; }
     }

@@ -425,7 +425,6 @@
     <Content Include="Content\js\sparkline.js" />
     <Content Include="Content\js\summernote\summernote.js" />
     <Content Include="Content\js\summernote\summernote.min.js" />
-    <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
@@ -581,11 +580,6 @@
     <Content Include="Views\Marca\Details.cshtml" />
     <Content Include="Views\Marca\Edit.cshtml" />
     <Content Include="Views\Marca\Index.cshtml" />
-    <Content Include="Views\CategoriaTransacao\Create.cshtml" />
-    <Content Include="Views\CategoriaTransacao\Delete.cshtml" />
-    <Content Include="Views\CategoriaTransacao\Details.cshtml" />
-    <Content Include="Views\CategoriaTransacao\Edit.cshtml" />
-    <Content Include="Views\CategoriaTransacao\Index.cshtml" />
     <Content Include="Views\Conta\Create.cshtml" />
     <Content Include="Views\Conta\Delete.cshtml" />
     <Content Include="Views\Conta\Details.cshtml" />
@@ -606,11 +600,6 @@
     <Content Include="Views\OrdemServico\Details.cshtml" />
     <Content Include="Views\OrdemServico\Edit.cshtml" />
     <Content Include="Views\OrdemServico\Index.cshtml" />
-    <Content Include="Views\MetodoPagamento\Create.cshtml" />
-    <Content Include="Views\MetodoPagamento\Delete.cshtml" />
-    <Content Include="Views\MetodoPagamento\Details.cshtml" />
-    <Content Include="Views\MetodoPagamento\Edit.cshtml" />
-    <Content Include="Views\MetodoPagamento\Index.cshtml" />
     <Content Include="Views\Usuario\Create.cshtml" />
     <Content Include="Views\Usuario\Delete.cshtml" />
     <Content Include="Views\Usuario\Details.cshtml" />
@@ -662,6 +651,22 @@
     <Content Include="Views\Cor\Edit.cshtml" />
     <Content Include="Views\Cor\Index.cshtml" />
     <Content Include="Views\Shared\_SideMenu.cshtml" />
+    <Content Include="Views\CategoriaTransacao\Create.cshtml" />
+    <Content Include="Views\CategoriaTransacao\Delete.cshtml" />
+    <Content Include="Views\CategoriaTransacao\Details.cshtml" />
+    <Content Include="Views\CategoriaTransacao\Edit.cshtml" />
+    <Content Include="Views\CategoriaTransacao\Index.cshtml" />
+    <Content Include="Views\Transacao\Create.cshtml" />
+    <Content Include="Views\Transacao\Delete.cshtml" />
+    <Content Include="Views\Transacao\Details.cshtml" />
+    <Content Include="Views\Transacao\Edit.cshtml" />
+    <Content Include="Views\Transacao\Index.cshtml" />
+    <Content Include="Views\MetodoPagamento\Create.cshtml" />
+    <Content Include="Views\MetodoPagamento\Delete.cshtml" />
+    <Content Include="Views\MetodoPagamento\Details.cshtml" />
+    <Content Include="Views\MetodoPagamento\Edit.cshtml" />
+    <Content Include="Views\MetodoPagamento\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Boolean.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

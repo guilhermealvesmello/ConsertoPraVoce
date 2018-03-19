@@ -11,7 +11,9 @@
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DescricaoLonga" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="DescricaoLonga" Type="varchar" MaxLength="500" />
+          <Property Name="IdCategoriaPai" Type="int" />
+          <Property Name="TipoDespesa" Type="char" MaxLength="1" Nullable="false" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -200,15 +202,15 @@
           <Property Name="DataTransacao" Type="datetime" Nullable="false" />
           <Property Name="Descricao" Type="varchar" MaxLength="150" />
           <Property Name="ValorBruto" Type="decimal" Precision="18" Scale="2" Nullable="false" />
-          <Property Name="ValorLiquido" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="IdCategoriaTransacao" Type="int" Nullable="false" />
           <Property Name="IdCliente" Type="int" />
-          <Property Name="PagamentoEfetuado" Type="bit" Nullable="false" />
+          <Property Name="PagamentoRecorrente" Type="bit" />
           <Property Name="Detalhes" Type="varchar" MaxLength="500" />
           <Property Name="IdConta" Type="int" Nullable="false" />
           <Property Name="IdOrdemServico" Type="int" />
-          <Property Name="TipoEntrada" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="IdOrdemCompra" Type="int" />
+          <Property Name="Parcelas" Type="int" Nullable="false" />
+          <Property Name="DataModificacao" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuario">
           <Key>
@@ -219,6 +221,18 @@
           <Property Name="Email" Type="varchar" MaxLength="150" Nullable="false" />
           <Property Name="Senha" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <Association Name="FK_CategoriaTransacao_CategoriaTransacao">
+          <End Role="CategoriaTransacao" Type="Self.CategoriaTransacao" Multiplicity="0..1" />
+          <End Role="CategoriaTransacao1" Type="Self.CategoriaTransacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriaTransacao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoriaTransacao1">
+              <PropertyRef Name="IdCategoriaPai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Cliente_ModeloAparelho">
           <End Role="ModeloAparelho" Type="Self.ModeloAparelho" Multiplicity="0..1" />
           <End Role="Cliente" Type="Self.Cliente" Multiplicity="*" />
@@ -399,6 +413,42 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Transacao_CategoriaTransacao">
+          <End Role="CategoriaTransacao" Type="Self.CategoriaTransacao" Multiplicity="1" />
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriaTransacao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transacao">
+              <PropertyRef Name="IdCategoriaTransacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Cliente">
+          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transacao">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Conta">
+          <End Role="Conta" Type="Self.Conta" Multiplicity="1" />
+          <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transacao">
+              <PropertyRef Name="IdConta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Transacao_OrdemCompra">
           <End Role="OrdemCompra" Type="Self.OrdemCompra" Multiplicity="0..1" />
           <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
@@ -411,31 +461,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Transactions_Account">
-          <End Role="Conta" Type="Self.Conta" Multiplicity="1" />
-          <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Conta">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transacao">
-              <PropertyRef Name="IdConta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Transactions_Client">
-          <End Role="Cliente" Type="Self.Cliente" Multiplicity="0..1" />
-          <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transacao">
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Transactions_ServiceOrder">
+        <Association Name="FK_Transacao_OrdemServico">
           <End Role="OrdemServico" Type="Self.OrdemServico" Multiplicity="0..1" />
           <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
           <ReferentialConstraint>
@@ -444,18 +470,6 @@
             </Principal>
             <Dependent Role="Transacao">
               <PropertyRef Name="IdOrdemServico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Transactions_TransactionCategory">
-          <End Role="CategoriaTransacao" Type="Self.CategoriaTransacao" Multiplicity="1" />
-          <End Role="Transacao" Type="Self.Transacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CategoriaTransacao">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transacao">
-              <PropertyRef Name="IdCategoriaTransacao" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -513,6 +527,10 @@
           <EntitySet Name="TipoProduto" EntityType="Self.TipoProduto" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Transacao" EntityType="Self.Transacao" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuario" EntityType="Self.Usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CategoriaTransacao_CategoriaTransacao" Association="Self.FK_CategoriaTransacao_CategoriaTransacao">
+            <End Role="CategoriaTransacao" EntitySet="CategoriaTransacao" />
+            <End Role="CategoriaTransacao1" EntitySet="CategoriaTransacao" />
+          </AssociationSet>
           <AssociationSet Name="FK_Cliente_ModeloAparelho" Association="Self.FK_Cliente_ModeloAparelho">
             <End Role="ModeloAparelho" EntitySet="ModeloAparelho" />
             <End Role="Cliente" EntitySet="Cliente" />
@@ -573,24 +591,24 @@
             <End Role="Servico" EntitySet="Servico" />
             <End Role="PrecoServico" EntitySet="PrecoServico" />
           </AssociationSet>
+          <AssociationSet Name="FK_Transacao_CategoriaTransacao" Association="Self.FK_Transacao_CategoriaTransacao">
+            <End Role="CategoriaTransacao" EntitySet="CategoriaTransacao" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Cliente" Association="Self.FK_Transacao_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Conta" Association="Self.FK_Transacao_Conta">
+            <End Role="Conta" EntitySet="Conta" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
           <AssociationSet Name="FK_Transacao_OrdemCompra" Association="Self.FK_Transacao_OrdemCompra">
             <End Role="OrdemCompra" EntitySet="OrdemCompra" />
             <End Role="Transacao" EntitySet="Transacao" />
           </AssociationSet>
-          <AssociationSet Name="FK_Transactions_Account" Association="Self.FK_Transactions_Account">
-            <End Role="Conta" EntitySet="Conta" />
-            <End Role="Transacao" EntitySet="Transacao" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transactions_Client" Association="Self.FK_Transactions_Client">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Transacao" EntitySet="Transacao" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transactions_ServiceOrder" Association="Self.FK_Transactions_ServiceOrder">
+          <AssociationSet Name="FK_Transacao_OrdemServico" Association="Self.FK_Transacao_OrdemServico">
             <End Role="OrdemServico" EntitySet="OrdemServico" />
-            <End Role="Transacao" EntitySet="Transacao" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transactions_TransactionCategory" Association="Self.FK_Transactions_TransactionCategory">
-            <End Role="CategoriaTransacao" EntitySet="CategoriaTransacao" />
             <End Role="Transacao" EntitySet="Transacao" />
           </AssociationSet>
         </EntityContainer>
@@ -629,7 +647,6 @@
             <Parameter Name="new_diagramname" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="sp_upgraddiagrams" />
-          <EntitySet Name="CategoriaTransacao" EntityType="CPVCModel.CategoriaTransacao" />
           <EntitySet Name="Cliente" EntityType="CPVCModel.Cliente" />
           <EntitySet Name="Conta" EntityType="CPVCModel.Conta" />
           <EntitySet Name="Marca" EntityType="CPVCModel.Marca" />
@@ -638,31 +655,10 @@
           <EntitySet Name="Servico" EntityType="CPVCModel.Servico" />
           <EntitySet Name="TipoAparelho" EntityType="CPVCModel.TipoAparelho" />
           <EntitySet Name="Usuario" EntityType="CPVCModel.Usuario" />
-          <EntitySet Name="Transacao" EntityType="CPVCModel.Transacao" />
-          <AssociationSet Name="FK_Transactions_TransactionCategory" Association="CPVCModel.FK_Transactions_TransactionCategory">
-            <End Role="CategoriaTransacao" EntitySet="CategoriaTransacao" />
-            <End Role="Transacao" EntitySet="Transacao" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transactions_Client" Association="CPVCModel.FK_Transactions_Client">
-            <End Role="Cliente" EntitySet="Cliente" />
-            <End Role="Transacao" EntitySet="Transacao" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transactions_Account" Association="CPVCModel.FK_Transactions_Account">
-            <End Role="Conta" EntitySet="Conta" />
-            <End Role="Transacao" EntitySet="Transacao" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transactions_ServiceOrder" Association="CPVCModel.FK_Transactions_ServiceOrder">
-            <End Role="OrdemServico" EntitySet="OrdemServico" />
-            <End Role="Transacao" EntitySet="Transacao" />
-          </AssociationSet>
           <EntitySet Name="OrdemCompra" EntityType="CPVCModel.OrdemCompra" />
           <AssociationSet Name="FK_OrdemServico_Cliente" Association="CPVCModel.FK_OrdemServico_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
             <End Role="OrdemServico" EntitySet="OrdemServico" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Transacao_OrdemCompra" Association="CPVCModel.FK_Transacao_OrdemCompra">
-            <End Role="OrdemCompra" EntitySet="OrdemCompra" />
-            <End Role="Transacao" EntitySet="Transacao" />
           </AssociationSet>
           <EntitySet Name="ModeloAparelho" EntityType="CPVCModel.ModeloAparelho" />
           <AssociationSet Name="FK_ModeloAparelho_Marca" Association="CPVCModel.FK_ModeloAparelho_Marca">
@@ -731,6 +727,32 @@
             <End Role="TipoProduto" EntitySet="TipoProduto" />
             <End Role="Produto" EntitySet="Produto" />
           </AssociationSet>
+          <EntitySet Name="CategoriaTransacao" EntityType="CPVCModel.CategoriaTransacao" />
+          <AssociationSet Name="FK_CategoriaTransacao_CategoriaTransacao" Association="CPVCModel.FK_CategoriaTransacao_CategoriaTransacao">
+            <End Role="CategoriaTransacao" EntitySet="CategoriaTransacao" />
+            <End Role="CategoriaTransacao1" EntitySet="CategoriaTransacao" />
+          </AssociationSet>
+          <EntitySet Name="Transacao" EntityType="CPVCModel.Transacao" />
+          <AssociationSet Name="FK_Transacao_CategoriaTransacao" Association="CPVCModel.FK_Transacao_CategoriaTransacao">
+            <End Role="CategoriaTransacao" EntitySet="CategoriaTransacao" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Cliente" Association="CPVCModel.FK_Transacao_Cliente">
+            <End Role="Cliente" EntitySet="Cliente" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_Conta" Association="CPVCModel.FK_Transacao_Conta">
+            <End Role="Conta" EntitySet="Conta" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_OrdemCompra" Association="CPVCModel.FK_Transacao_OrdemCompra">
+            <End Role="OrdemCompra" EntitySet="OrdemCompra" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transacao_OrdemServico" Association="CPVCModel.FK_Transacao_OrdemServico">
+            <End Role="OrdemServico" EntitySet="OrdemServico" />
+            <End Role="Transacao" EntitySet="Transacao" />
+          </AssociationSet>
           </EntityContainer>
         <ComplexType Name="sp_helpdiagramdefinition_Result">
           <Property Type="Int32" Name="version" Nullable="true" />
@@ -743,15 +765,6 @@
           <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
           <Property Type="Int32" Name="OwnerID" Nullable="false" />
         </ComplexType>
-        <EntityType Name="CategoriaTransacao">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DescricaoLonga" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transactions_TransactionCategory" FromRole="CategoriaTransacao" ToRole="Transacao" />
-        </EntityType>
         <EntityType Name="Cliente">
           <Key>
             <PropertyRef Name="Id" />
@@ -764,10 +777,10 @@
           <Property Name="DataNascimento" Type="DateTime" Precision="0" />
           <Property Name="Notas" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Data" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transactions_Client" FromRole="Cliente" ToRole="Transacao" />
           <NavigationProperty Name="OrdemServico" Relationship="CPVCModel.FK_OrdemServico_Cliente" FromRole="Cliente" ToRole="OrdemServico" />
           <Property Name="IdModeloAparelho" Type="Int32" />
           <NavigationProperty Name="ModeloAparelho" Relationship="CPVCModel.FK_Cliente_ModeloAparelho" FromRole="Cliente" ToRole="ModeloAparelho" />
+          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transacao_Cliente" FromRole="Cliente" ToRole="Transacao" />
         </EntityType>
         <EntityType Name="Conta">
           <Key>
@@ -776,7 +789,7 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Descricao" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
-          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transactions_Account" FromRole="Conta" ToRole="Transacao" />
+          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transacao_Conta" FromRole="Conta" ToRole="Transacao" />
         </EntityType>
         <EntityType Name="Marca">
           <Key>
@@ -796,10 +809,10 @@
           <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataEdicao" Type="DateTime" Precision="3" />
           <Property Name="Prazo" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transactions_ServiceOrder" FromRole="OrdemServico" ToRole="Transacao" />
           <Property Name="IdCliente" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Cliente" Relationship="CPVCModel.FK_OrdemServico_Cliente" FromRole="OrdemServico" ToRole="Cliente" />
           <NavigationProperty Name="Saida" Relationship="CPVCModel.FK_Saida_OrdemServico" FromRole="OrdemServico" ToRole="Saida" />
+          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transacao_OrdemServico" FromRole="OrdemServico" ToRole="Transacao" />
         </EntityType>
         <EntityType Name="Scripts">
           <Key>
@@ -834,77 +847,6 @@
           <Property Name="Email" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="false" />
           <Property Name="Senha" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="Transacao">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="DataTransacao" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="Descricao" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
-          <Property Name="ValorBruto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="ValorLiquido" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
-          <Property Name="IdCategoriaTransacao" Type="Int32" Nullable="false" />
-          <Property Name="IdCliente" Type="Int32" />
-          <Property Name="PagamentoEfetuado" Type="Boolean" Nullable="false" />
-          <Property Name="Detalhes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-          <Property Name="IdConta" Type="Int32" Nullable="false" />
-          <Property Name="IdOrdemServico" Type="Int32" />
-          <Property Name="TipoEntrada" Type="String" Nullable="false" MaxLength="1" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="CategoriaTransacao" Relationship="CPVCModel.FK_Transactions_TransactionCategory" FromRole="Transacao" ToRole="CategoriaTransacao" />
-          <NavigationProperty Name="Cliente" Relationship="CPVCModel.FK_Transactions_Client" FromRole="Transacao" ToRole="Cliente" />
-          <NavigationProperty Name="Conta" Relationship="CPVCModel.FK_Transactions_Account" FromRole="Transacao" ToRole="Conta" />
-          <NavigationProperty Name="OrdemServico" Relationship="CPVCModel.FK_Transactions_ServiceOrder" FromRole="Transacao" ToRole="OrdemServico" />
-          <Property Name="IdOrdemCompra" Type="Int32" />
-          <NavigationProperty Name="OrdemCompra" Relationship="CPVCModel.FK_Transacao_OrdemCompra" FromRole="Transacao" ToRole="OrdemCompra" />
-        </EntityType>
-        <Association Name="FK_Transactions_TransactionCategory">
-          <End Type="CPVCModel.CategoriaTransacao" Role="CategoriaTransacao" Multiplicity="1" />
-          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="CategoriaTransacao">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transacao">
-              <PropertyRef Name="IdCategoriaTransacao" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Transactions_Client">
-          <End Type="CPVCModel.Cliente" Role="Cliente" Multiplicity="0..1" />
-          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Cliente">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transacao">
-              <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Transactions_Account">
-          <End Type="CPVCModel.Conta" Role="Conta" Multiplicity="1" />
-          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Conta">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transacao">
-              <PropertyRef Name="IdConta" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Transactions_ServiceOrder">
-          <End Type="CPVCModel.OrdemServico" Role="OrdemServico" Multiplicity="0..1" />
-          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrdemServico">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transacao">
-              <PropertyRef Name="IdOrdemServico" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="OrdemCompra">
           <Key>
             <PropertyRef Name="Id" />
@@ -915,9 +857,9 @@
           <Property Name="DataCriacao" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DataEdicao" Type="DateTime" Precision="3" />
           <Property Name="IdFornecedor" Type="Int32" />
-          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transacao_OrdemCompra" FromRole="OrdemCompra" ToRole="Transacao" />
           <NavigationProperty Name="Fornecedor" Relationship="CPVCModel.FK_OrdemCompra_Fornecedor" FromRole="OrdemCompra" ToRole="Fornecedor" />
           <NavigationProperty Name="Entrada" Relationship="CPVCModel.FK_Entrada_OrdemCompra" FromRole="OrdemCompra" ToRole="Entrada" />
+          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transacao_OrdemCompra" FromRole="OrdemCompra" ToRole="Transacao" />
         </EntityType>
         <Association Name="FK_OrdemServico_Cliente">
           <End Type="CPVCModel.Cliente" Role="Cliente" Multiplicity="1" />
@@ -928,18 +870,6 @@
             </Principal>
             <Dependent Role="OrdemServico">
               <PropertyRef Name="IdCliente" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Transacao_OrdemCompra">
-          <End Type="CPVCModel.OrdemCompra" Role="OrdemCompra" Multiplicity="0..1" />
-          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="OrdemCompra">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Transacao">
-              <PropertyRef Name="IdOrdemCompra" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1237,6 +1167,114 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="CategoriaTransacao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descricao" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescricaoLonga" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdCategoriaPai" Type="Int32" />
+          <NavigationProperty Name="CategoriaTransacao1" Relationship="CPVCModel.FK_CategoriaTransacao_CategoriaTransacao" FromRole="CategoriaTransacao" ToRole="CategoriaTransacao1" />
+          <NavigationProperty Name="CategoriaTransacao2" Relationship="CPVCModel.FK_CategoriaTransacao_CategoriaTransacao" FromRole="CategoriaTransacao1" ToRole="CategoriaTransacao" />
+          <Property Name="TipoDespesa" Type="String" Nullable="false" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transacao_CategoriaTransacao" FromRole="CategoriaTransacao" ToRole="Transacao" />
+        </EntityType>
+        <Association Name="FK_CategoriaTransacao_CategoriaTransacao">
+          <End Type="CPVCModel.CategoriaTransacao" Role="CategoriaTransacao" Multiplicity="0..1" />
+          <End Type="CPVCModel.CategoriaTransacao" Role="CategoriaTransacao1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriaTransacao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CategoriaTransacao1">
+              <PropertyRef Name="IdCategoriaPai" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Transacao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DataTransacao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Descricao" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ValorBruto" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
+          <Property Name="IdCategoriaTransacao" Type="Int32" Nullable="false" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="PagamentoRecorrente" Type="Boolean" />
+          <Property Name="Detalhes" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IdConta" Type="Int32" Nullable="false" />
+          <Property Name="IdOrdemServico" Type="Int32" />
+          <Property Name="IdOrdemCompra" Type="Int32" />
+          <Property Name="Parcelas" Type="Int32" Nullable="false" />
+          <Property Name="DataModificacao" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CategoriaTransacao" Relationship="CPVCModel.FK_Transacao_CategoriaTransacao" FromRole="Transacao" ToRole="CategoriaTransacao" />
+          <NavigationProperty Name="Cliente" Relationship="CPVCModel.FK_Transacao_Cliente" FromRole="Transacao" ToRole="Cliente" />
+          <NavigationProperty Name="Conta" Relationship="CPVCModel.FK_Transacao_Conta" FromRole="Transacao" ToRole="Conta" />
+          <NavigationProperty Name="OrdemCompra" Relationship="CPVCModel.FK_Transacao_OrdemCompra" FromRole="Transacao" ToRole="OrdemCompra" />
+          <NavigationProperty Name="OrdemServico" Relationship="CPVCModel.FK_Transacao_OrdemServico" FromRole="Transacao" ToRole="OrdemServico" />
+        </EntityType>
+        <Association Name="FK_Transacao_CategoriaTransacao">
+          <End Type="CPVCModel.CategoriaTransacao" Role="CategoriaTransacao" Multiplicity="1" />
+          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CategoriaTransacao">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transacao">
+              <PropertyRef Name="IdCategoriaTransacao" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Cliente">
+          <End Type="CPVCModel.Cliente" Role="Cliente" Multiplicity="0..1" />
+          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cliente">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transacao">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_Conta">
+          <End Type="CPVCModel.Conta" Role="Conta" Multiplicity="1" />
+          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conta">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transacao">
+              <PropertyRef Name="IdConta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_OrdemCompra">
+          <End Type="CPVCModel.OrdemCompra" Role="OrdemCompra" Multiplicity="0..1" />
+          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdemCompra">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transacao">
+              <PropertyRef Name="IdOrdemCompra" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transacao_OrdemServico">
+          <End Type="CPVCModel.OrdemServico" Role="OrdemServico" Multiplicity="0..1" />
+          <End Type="CPVCModel.Transacao" Role="Transacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrdemServico">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transacao">
+              <PropertyRef Name="IdOrdemServico" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1267,15 +1305,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="CPVCModel.Store.sp_renamediagram" />
           <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="CPVCModel.Store.sp_upgraddiagrams" />
-          <EntitySetMapping Name="CategoriaTransacao">
-            <EntityTypeMapping TypeName="CPVCModel.CategoriaTransacao">
-              <MappingFragment StoreEntitySet="CategoriaTransacao">
-                <ScalarProperty Name="DescricaoLonga" ColumnName="DescricaoLonga" />
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="CPVCModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
@@ -1352,25 +1381,6 @@
                 <ScalarProperty Name="Senha" ColumnName="Senha" />
                 <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="Nome" ColumnName="Nome" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Transacao">
-            <EntityTypeMapping TypeName="CPVCModel.Transacao">
-              <MappingFragment StoreEntitySet="Transacao">
-                <ScalarProperty Name="IdOrdemCompra" ColumnName="IdOrdemCompra" />
-                <ScalarProperty Name="TipoEntrada" ColumnName="TipoEntrada" />
-                <ScalarProperty Name="IdOrdemServico" ColumnName="IdOrdemServico" />
-                <ScalarProperty Name="IdConta" ColumnName="IdConta" />
-                <ScalarProperty Name="Detalhes" ColumnName="Detalhes" />
-                <ScalarProperty Name="PagamentoEfetuado" ColumnName="PagamentoEfetuado" />
-                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
-                <ScalarProperty Name="IdCategoriaTransacao" ColumnName="IdCategoriaTransacao" />
-                <ScalarProperty Name="ValorLiquido" ColumnName="ValorLiquido" />
-                <ScalarProperty Name="ValorBruto" ColumnName="ValorBruto" />
-                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
-                <ScalarProperty Name="DataTransacao" ColumnName="DataTransacao" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1499,6 +1509,36 @@
             <EntityTypeMapping TypeName="CPVCModel.Saida">
               <MappingFragment StoreEntitySet="Saida">
                 <ScalarProperty Name="IdOrdemServico" ColumnName="IdOrdemServico" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CategoriaTransacao">
+            <EntityTypeMapping TypeName="CPVCModel.CategoriaTransacao">
+              <MappingFragment StoreEntitySet="CategoriaTransacao">
+                <ScalarProperty Name="TipoDespesa" ColumnName="TipoDespesa" />
+                <ScalarProperty Name="IdCategoriaPai" ColumnName="IdCategoriaPai" />
+                <ScalarProperty Name="DescricaoLonga" ColumnName="DescricaoLonga" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transacao">
+            <EntityTypeMapping TypeName="CPVCModel.Transacao">
+              <MappingFragment StoreEntitySet="Transacao">
+                <ScalarProperty Name="DataModificacao" ColumnName="DataModificacao" />
+                <ScalarProperty Name="Parcelas" ColumnName="Parcelas" />
+                <ScalarProperty Name="IdOrdemCompra" ColumnName="IdOrdemCompra" />
+                <ScalarProperty Name="IdOrdemServico" ColumnName="IdOrdemServico" />
+                <ScalarProperty Name="IdConta" ColumnName="IdConta" />
+                <ScalarProperty Name="Detalhes" ColumnName="Detalhes" />
+                <ScalarProperty Name="PagamentoRecorrente" ColumnName="PagamentoRecorrente" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="IdCategoriaTransacao" ColumnName="IdCategoriaTransacao" />
+                <ScalarProperty Name="ValorBruto" ColumnName="ValorBruto" />
+                <ScalarProperty Name="Descricao" ColumnName="Descricao" />
+                <ScalarProperty Name="DataTransacao" ColumnName="DataTransacao" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

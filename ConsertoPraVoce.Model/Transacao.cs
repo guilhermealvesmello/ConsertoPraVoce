@@ -18,20 +18,20 @@ namespace ConsertoPraVoce.Model
         public System.DateTime DataTransacao { get; set; }
         public string Descricao { get; set; }
         public decimal ValorBruto { get; set; }
-        public decimal ValorLiquido { get; set; }
         public int IdCategoriaTransacao { get; set; }
         public Nullable<int> IdCliente { get; set; }
-        public bool PagamentoEfetuado { get; set; }
+        public Nullable<bool> PagamentoRecorrente { get; set; }
         public string Detalhes { get; set; }
         public int IdConta { get; set; }
         public Nullable<int> IdOrdemServico { get; set; }
-        public string TipoEntrada { get; set; }
         public Nullable<int> IdOrdemCompra { get; set; }
+        public int Parcelas { get; set; }
+        public System.DateTime DataModificacao { get; set; }
     
         public virtual CategoriaTransacao CategoriaTransacao { get; set; }
         public virtual Cliente Cliente { get; set; }
         public virtual Conta Conta { get; set; }
-        public virtual OrdemServico OrdemServico { get; set; }
         public virtual OrdemCompra OrdemCompra { get; set; }
+        public virtual OrdemServico OrdemServico { get; set; }
     }
 }

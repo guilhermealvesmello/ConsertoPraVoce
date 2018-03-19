@@ -4,8 +4,7 @@
     ViewBag.Title = "Create";
 }
 
-
-@using (Html.BeginForm("Create", "MetodoPagamento", FormMethod.Post, new { @class = "form-horizontal col-md-5" })) 
+@using (Html.BeginForm("Create", "MetodoPagamento", FormMethod.Post, new { @class = "form-horizontal", @style= "max-width: 800px;" })) 
 {
     @Html.AntiForgeryToken()
     
@@ -23,10 +22,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Pagamentos, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Parcelas, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Pagamentos, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Pagamentos, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Parcelas, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Parcelas, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -39,10 +38,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Prazo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PrazoPagamento, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Prazo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Prazo, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.PrazoPagamento, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PrazoPagamento, "", new { @class = "text-danger" })
             </div>
         </div>
 
@@ -53,7 +52,9 @@
         </div>
 		</fieldset>
     </div>
-	<div>
-		@Html.ActionLink("Voltar à Lista", "Index")
-	</div>
+<div>
+    @Html.ActionLink("Voltar à Lista", "Index")
+</div>
 }
+
+

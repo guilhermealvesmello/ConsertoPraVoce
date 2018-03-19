@@ -1,0 +1,9 @@
+﻿@model bool?
+@using System.Web.Mvc
+@{
+	var selectList = new List<SelectListItem>();
+	selectList.Add(new SelectListItem { Text = "Selecionar", Value = "" });
+	selectList.Add(new SelectListItem { Text = "Sim", Value = "true" });
+	selectList.Add(new SelectListItem { Text = "Não", Value = "false" });
+}
+@Html.DropDownListFor(m => m, selectList, htmlAttributes: new { @class = "form-control" })

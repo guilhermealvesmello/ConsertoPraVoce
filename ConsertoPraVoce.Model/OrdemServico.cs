@@ -17,8 +17,8 @@ namespace ConsertoPraVoce.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public OrdemServico()
         {
-            this.Transacao = new HashSet<Transacao>();
             this.Saida = new HashSet<Saida>();
+            this.Transacao = new HashSet<Transacao>();
         }
     
         public int Id { get; set; }
@@ -29,10 +29,10 @@ namespace ConsertoPraVoce.Model
         public Nullable<System.DateTime> Prazo { get; set; }
         public int IdCliente { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Transacao> Transacao { get; set; }
         public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Saida> Saida { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transacao> Transacao { get; set; }
     }
 }

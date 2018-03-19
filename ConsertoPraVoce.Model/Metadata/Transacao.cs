@@ -21,7 +21,9 @@ namespace ConsertoPraVoce.Model
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
             [DisplayName("Data da Trasação")]
-            public DateTime DataTransacao { get; set; }
+			[DataType(DataType.Date)]
+			[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = "")]
+			public DateTime DataTransacao { get; set; }
 
             [DisplayName("Descrição")]
             [MaxLength(150, ErrorMessage = "Máximo número de caracteres: 150")]
@@ -29,39 +31,38 @@ namespace ConsertoPraVoce.Model
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
             [DisplayName("Valor Bruto")]
-            public decimal ValorBruto { get; set; }
+            public decimal ValorBruto { get; set; }			
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
-            [DisplayName("Valor Líquido")]
-            public decimal ValorLiquido { get; set; }
-
-            [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
-            [DisplayName("Categoria da Transação")]
+            [DisplayName("Categoria")]
             public int IdCategoriaTransacao { get; set; }
 
             [DisplayName("Cliente")]
             public int IdCliente { get; set; }
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
-            [DisplayName("Pagamento Efetuado")]
-            public bool PagamentoEfetuado { get; set; }
+            [DisplayName("Recorrente")]
+            public bool PagamentoRecorrente { get; set; }
 
             [DisplayName("Detalhes")]
             [MaxLength(500, ErrorMessage = "Máximo número de caracteres: 500")]
-            public string Detalhes { get; set; }
+			[DataType(DataType.MultilineText)]			
+			public string Detalhes { get; set; }
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
             [DisplayName("Conta")]
             public int IdConta { get; set; }
 
             [DisplayName("Ordem de Serviço")]
-            public int IdOrdemServico { get; set; }
+            public int? IdOrdemServico { get; set; }
 
-            [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
-            [DisplayName("Tipo de Entrada")]
-            public string TipoEntrada { get; set; }
+			[DisplayName("Ordem de Compra")]
+			public int? IdOrdemCompra { get; set; }
 
-        }
+			[DisplayName("Parcelas")]
+			public int Parcelas { get; set; }
+
+		}
 
     }
 }

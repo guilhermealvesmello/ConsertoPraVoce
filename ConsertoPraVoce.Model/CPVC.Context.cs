@@ -27,7 +27,6 @@ namespace ConsertoPraVoce.Model
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<CategoriaTransacao> CategoriaTransacao { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
         public virtual DbSet<Conta> Conta { get; set; }
         public virtual DbSet<Marca> Marca { get; set; }
@@ -36,7 +35,6 @@ namespace ConsertoPraVoce.Model
         public virtual DbSet<Servico> Servico { get; set; }
         public virtual DbSet<TipoAparelho> TipoAparelho { get; set; }
         public virtual DbSet<Usuario> Usuario { get; set; }
-        public virtual DbSet<Transacao> Transacao { get; set; }
         public virtual DbSet<OrdemCompra> OrdemCompra { get; set; }
         public virtual DbSet<ModeloAparelho> ModeloAparelho { get; set; }
         public virtual DbSet<PrecoServico> PrecoServico { get; set; }
@@ -49,6 +47,8 @@ namespace ConsertoPraVoce.Model
         public virtual DbSet<ItemSaida> ItemSaida { get; set; }
         public virtual DbSet<Produto> Produto { get; set; }
         public virtual DbSet<Saida> Saida { get; set; }
+        public virtual DbSet<CategoriaTransacao> CategoriaTransacao { get; set; }
+        public virtual DbSet<Transacao> Transacao { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

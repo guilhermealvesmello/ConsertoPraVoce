@@ -46,7 +46,7 @@ namespace ConsertoPraVoce.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Descricao,Pagamentos,Taxa,Prazo")] MetodoPagamento metodoPagamento)
+        public ActionResult Create([Bind(Include = "Id,Descricao,Parcelas,Taxa,PrazoPagamento")] MetodoPagamento metodoPagamento)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace ConsertoPraVoce.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Descricao,Pagamentos,Taxa,Prazo")] MetodoPagamento metodoPagamento)
+        public ActionResult Edit([Bind(Include = "Id,Descricao,Parcelas,Taxa,PrazoPagamento")] MetodoPagamento metodoPagamento)
         {
             if (ModelState.IsValid)
             {
