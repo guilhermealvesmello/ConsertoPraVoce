@@ -48,6 +48,9 @@
         <AssociationConnector Association="CPVCModel.FK_Transacao_Conta" />
         <AssociationConnector Association="CPVCModel.FK_Transacao_OrdemCompra" />
         <AssociationConnector Association="CPVCModel.FK_Transacao_OrdemServico" />
+        <EntityTypeShape EntityType="CPVCModel.TransacaoItem" Width="1.5" PointX="17" PointY="9.25" />
+        <AssociationConnector Association="CPVCModel.FK_TransacaoItem_Transacao" />
+        <AssociationConnector Association="CPVCModel.FK_Transacao_CategoriaTransacao1" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -14,6 +14,12 @@ namespace ConsertoPraVoce.Model
     
     public partial class Transacao
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Transacao()
+        {
+            this.TransacaoItem = new HashSet<TransacaoItem>();
+        }
+    
         public int Id { get; set; }
         public System.DateTime DataTransacao { get; set; }
         public string Descricao { get; set; }
@@ -27,11 +33,15 @@ namespace ConsertoPraVoce.Model
         public Nullable<int> IdOrdemCompra { get; set; }
         public int Parcelas { get; set; }
         public System.DateTime DataModificacao { get; set; }
+        public int IdSubCategoriaTransacao { get; set; }
     
         public virtual CategoriaTransacao CategoriaTransacao { get; set; }
         public virtual Cliente Cliente { get; set; }
         public virtual Conta Conta { get; set; }
         public virtual OrdemCompra OrdemCompra { get; set; }
         public virtual OrdemServico OrdemServico { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TransacaoItem> TransacaoItem { get; set; }
+        public virtual CategoriaTransacao CategoriaTransacao1 { get; set; }
     }
 }

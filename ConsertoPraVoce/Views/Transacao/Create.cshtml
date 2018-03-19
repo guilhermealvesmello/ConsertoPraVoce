@@ -4,6 +4,22 @@
 	ViewBag.Title = "Create";
 }
 
+<script type="text/javascript">
+	function buscarSubCategorias(val) {
+		console.log(val);
+		$.getJSON('@Url.Action("BuscarSubCategorias", "Transacao")' + "?value=" + val, function (result) {
+			$("#IdSubCategoriaTransacao").html(""); // makes select null before filling process
+			var data = result.data;
+			for (var i = 0; i < data.length; i++) {
+				$("#IdSubCategoriaTransacao").append("<option value=" + data[i].Value + ">" + data[i].Text + "</option>")
+			}
+
+		})
+	}
+
+</script>
+
+
 @using (Html.BeginForm("Create", "Transacao", FormMethod.Post, new { @class = "form-horizontal", @style = "max-width: 800px;" }))
 {
 	@Html.AntiForgeryToken()
@@ -34,10 +50,20 @@
 					@Html.ValidationMessageFor(model => model.ValorBruto, "", new { @class = "text-danger" })
 				</div>
 
+			</div>
+
+
+
+			<div class="form-group">
 				@Html.LabelFor(model => model.IdCategoriaTransacao, htmlAttributes: new { @class = "control-label col-md-2" })
 				<div class="col-md-4">
-					@Html.DropDownList("IdCategoriaTransacao", null, "Selecionar", htmlAttributes: new { @class = "form-control" })
+					@Html.DropDownList("IdCategoriaTransacao", null, "Selecionar", htmlAttributes: new { @class = "form-control", @onchange = "javascript:buscarSubCategorias(this.value);" })
 					@Html.ValidationMessageFor(model => model.IdCategoriaTransacao, "", new { @class = "text-danger" })
+				</div>
+				@Html.LabelFor(model => model.IdSubCategoriaTransacao, htmlAttributes: new { @class = "control-label col-md-2" })
+				<div class="col-md-4">
+					@Html.DropDownList("IdSubCategoriaTransacao", null, "Selecionar", htmlAttributes: new { @class = "form-control" })
+					@Html.ValidationMessageFor(model => model.IdSubCategoriaTransacao, "", new { @class = "text-danger" })
 				</div>
 			</div>
 

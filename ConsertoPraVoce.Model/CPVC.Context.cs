@@ -49,6 +49,7 @@ namespace ConsertoPraVoce.Model
         public virtual DbSet<Saida> Saida { get; set; }
         public virtual DbSet<CategoriaTransacao> CategoriaTransacao { get; set; }
         public virtual DbSet<Transacao> Transacao { get; set; }
+        public virtual DbSet<TransacaoItem> TransacaoItem { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

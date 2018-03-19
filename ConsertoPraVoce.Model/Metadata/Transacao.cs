@@ -37,7 +37,11 @@ namespace ConsertoPraVoce.Model
             [DisplayName("Categoria")]
             public int IdCategoriaTransacao { get; set; }
 
-            [DisplayName("Cliente")]
+			[Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
+			[DisplayName("Sub Categoria")]
+			public int IdSubCategoriaTransacao { get; set; }
+
+			[DisplayName("Cliente")]
             public int IdCliente { get; set; }
 
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]

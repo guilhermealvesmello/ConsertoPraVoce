@@ -19,6 +19,7 @@ namespace ConsertoPraVoce.Model
         {
             this.CategoriaTransacao1 = new HashSet<CategoriaTransacao>();
             this.Transacao = new HashSet<Transacao>();
+            this.Transacao1 = new HashSet<Transacao>();
         }
     
         public int Id { get; set; }
@@ -32,5 +33,7 @@ namespace ConsertoPraVoce.Model
         public virtual CategoriaTransacao CategoriaTransacao2 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transacao> Transacao { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transacao> Transacao1 { get; set; }
     }
 }

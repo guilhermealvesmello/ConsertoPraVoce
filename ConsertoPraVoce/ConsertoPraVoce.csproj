@@ -682,6 +682,10 @@
       <Project>{e43e24d6-3f82-4d5a-a32e-f843d49f6885}</Project>
       <Name>ConsertoPraVoce.Model</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ConsertoPraVoce.Regras\ConsertoPraVoce.Regras.csproj">
+      <Project>{29130e2c-9d81-41b7-8384-f0bc672d351b}</Project>
+      <Name>ConsertoPraVoce.Regras</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />

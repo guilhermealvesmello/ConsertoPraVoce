@@ -176,6 +176,9 @@
     <Compile Include="Transacao.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="TransacaoItem.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Usuario.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
