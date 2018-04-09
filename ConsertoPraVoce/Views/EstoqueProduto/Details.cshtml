@@ -1,0 +1,64 @@
+﻿@model ConsertoPraVoce.Model.EstoqueProduto
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div>
+    <h4>EstoqueProduto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdOrdemServico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdOrdemServico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataMovimentacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataMovimentacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorUnitario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorUnitario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HistoricoEstoque.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HistoricoEstoque.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrdemCompra.DescricaoCurta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrdemCompra.DescricaoCurta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Produto.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Produto.Descricao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Editar", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Voltar à Lista", "Index")
+</p>

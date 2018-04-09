@@ -14,7 +14,8 @@ namespace ConsertoPraVoce.Menu
 			menu.Add(CriarMenu("Index", "Fornecedor", "Fornecedores", "fa fa-handshake-o"));
 			menu.Add(CriarMenu("Index", "Cliente", "Clientes", "fa fa-users"));
 			menu.Add(CriarMenu("Index", "Conta", "Contas", "fa fa-bank"));
-			
+			menu.Add(CriarMenu("Index", "OrdemCompra", "Ordem de Compra", "fa fa-bank"));
+
 
 			//Serviços
 			var srv = CriarMenu("", "", "Serviços", "fa fa-wrench", "has-sub");
@@ -23,13 +24,12 @@ namespace ConsertoPraVoce.Menu
 			srv.SubMenu.Add(CriarMenu("Index", "Servico", "Serviços", ""));
 			menu.Add(srv);
 
-			//Categorias
-			var cat = CriarMenu("", "", "Categorias", "fa fa-filter", "has-sub");
-			cat.SubMenu.Add(CriarMenu("Index", "CategoriaTransacao", "Transação", ""));
-			menu.Add(cat);
+			//Estoque
+			var est = CriarMenu("", "", "Estoque", "fa fa-filter", "has-sub");
+			est.SubMenu.Add(CriarMenu("index", "EstoqueProduto", "Estoque", ""));
+			est.SubMenu.Add(CriarMenu("index", "HistoricoEstoque", "Histórico Estoque", ""));			
+			menu.Add(est);
 
-			
-			
 			//Produtos
 			var prd = CriarMenu("", "", "Produtos", "fa fa-table", "has-sub");
 			prd.SubMenu.Add(CriarMenu("Index", "Produto", "Produtos", ""));

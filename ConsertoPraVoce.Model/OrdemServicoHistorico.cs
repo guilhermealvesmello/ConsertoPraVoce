@@ -12,16 +12,15 @@ namespace ConsertoPraVoce.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class ItemSaida
+    public partial class OrdemServicoHistorico
     {
         public int Id { get; set; }
-        public int IdProduto { get; set; }
-        public int IdSsaida { get; set; }
-        public int Valor { get; set; }
-        public int Quantidade { get; set; }
-        public System.DateTime DataEntrada { get; set; }
+        public string Notas { get; set; }
+        public System.DateTime Data { get; set; }
+        public int IdOrdemServico { get; set; }
+        public int IdUsuario { get; set; }
     
-        public virtual Produto Produto { get; set; }
-        public virtual Saida Saida { get; set; }
+        public virtual OrdemServico OrdemServico { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

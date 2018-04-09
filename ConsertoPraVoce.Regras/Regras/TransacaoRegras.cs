@@ -11,7 +11,7 @@ namespace ConsertoPraVoce.Regras.Regras
 	{
 		CPVCEntities db = new CPVCEntities();
 		public void GravarTransacao(Transacao t)
-		{
+		{			
 			db.Transacao.Add(t);
 			db.SaveChanges();
 

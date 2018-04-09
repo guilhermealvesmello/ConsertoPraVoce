@@ -36,8 +36,6 @@ namespace ConsertoPraVoce.Model
             public string Telefone2 { get; set; }
 
             [DisplayName("Aniversário")]
-			[DataType(DataType.Date)]
-			[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = "")]
 			public DateTime DataNascimento { get; set; }
 
             [DisplayName("Notas")]
@@ -46,8 +44,8 @@ namespace ConsertoPraVoce.Model
             public string Notas { get; set; }
 
             [DisplayName("Data Cadastro")]
-			[DataType(DataType.Date)]
-			[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = "")]
+			//[DataType(DataType.Date)]
+			//[DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm}", ApplyFormatInEditMode = true)]
 			public DateTime Data { get; set; }
 
         }

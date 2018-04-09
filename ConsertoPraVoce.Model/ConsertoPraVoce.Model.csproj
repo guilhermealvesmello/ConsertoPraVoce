@@ -106,16 +106,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CPVC.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Entrada.cs">
+    <Compile Include="EstoqueProduto.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Fornecedor.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="ItemEntrada.cs">
-      <DependentUpon>CPVC.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ItemSaida.cs">
+    <Compile Include="HistoricoEstoque.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Marca.cs">
@@ -145,6 +142,9 @@
     <Compile Include="OrdemServico.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="OrdemServicoHistorico.cs">
+      <DependentUpon>CPVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="PrecoServico.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
@@ -152,9 +152,6 @@
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Saida.cs">
-      <DependentUpon>CPVC.tt</DependentUpon>
-    </Compile>
     <Compile Include="Scripts.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
@@ -182,6 +179,7 @@
     <Compile Include="Usuario.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\OrdemCompraVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="CPVC.edmx">

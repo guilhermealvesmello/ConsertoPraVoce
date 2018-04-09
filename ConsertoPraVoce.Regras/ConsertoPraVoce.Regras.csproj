@@ -49,7 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connections\BaseEntity.cs" />
+    <Compile Include="Connections\GenericRepository.cs" />
+    <Compile Include="Interfaces\IDbContext.cs" />
+    <Compile Include="Interfaces\IRepository.cs" />
+    <Compile Include="Mappings\FornecedorMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Regras\Fornecedor.cs" />
+    <Compile Include="Regras\OrdemCompra.cs" />
     <Compile Include="Regras\TransacaoRegras.cs" />
   </ItemGroup>
   <ItemGroup>

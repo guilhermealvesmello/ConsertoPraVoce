@@ -17,8 +17,7 @@ namespace ConsertoPraVoce.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Produto()
         {
-            this.ItemEntrada = new HashSet<ItemEntrada>();
-            this.ItemSaida = new HashSet<ItemSaida>();
+            this.EstoqueProduto = new HashSet<EstoqueProduto>();
         }
     
         public int Id { get; set; }
@@ -30,11 +29,9 @@ namespace ConsertoPraVoce.Model
         public Nullable<int> IdCor { get; set; }
     
         public virtual Cor Cor { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ItemEntrada> ItemEntrada { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ItemSaida> ItemSaida { get; set; }
         public virtual ModeloAparelho ModeloAparelho { get; set; }
         public virtual TipoProduto TipoProduto { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EstoqueProduto> EstoqueProduto { get; set; }
     }
 }

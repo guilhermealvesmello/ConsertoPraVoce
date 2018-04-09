@@ -12,19 +12,18 @@ namespace ConsertoPraVoce.Model
     using System;
     using System.Collections.Generic;
     
-    public partial class Saida
+    public partial class EstoqueProduto
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Saida()
-        {
-            this.ItemSaida = new HashSet<ItemSaida>();
-        }
-    
         public int Id { get; set; }
+        public int IdProduto { get; set; }
+        public Nullable<int> IdOrdemCompra { get; set; }
         public Nullable<int> IdOrdemServico { get; set; }
+        public System.DateTime DataMovimentacao { get; set; }
+        public int IdHistorico { get; set; }
+        public decimal ValorUnitario { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ItemSaida> ItemSaida { get; set; }
-        public virtual OrdemServico OrdemServico { get; set; }
+        public virtual HistoricoEstoque HistoricoEstoque { get; set; }
+        public virtual OrdemCompra OrdemCompra { get; set; }
+        public virtual Produto Produto { get; set; }
     }
 }

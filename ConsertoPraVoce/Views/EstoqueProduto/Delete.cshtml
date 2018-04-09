@@ -1,0 +1,70 @@
+﻿@model ConsertoPraVoce.Model.EstoqueProduto
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h3>Tem certeza que deseja deletar este registro?</h3>
+<div>
+    <h4>EstoqueProduto</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdOrdemServico)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdOrdemServico)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataMovimentacao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataMovimentacao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ValorUnitario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ValorUnitario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HistoricoEstoque.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HistoricoEstoque.Descricao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OrdemCompra.DescricaoCurta)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OrdemCompra.DescricaoCurta)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Produto.Descricao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Produto.Descricao)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Deletar" class="btn btn-default" /> |
+            @Html.ActionLink("Voltar à Lista", "Index")
+        </div>
+    }
+</div>

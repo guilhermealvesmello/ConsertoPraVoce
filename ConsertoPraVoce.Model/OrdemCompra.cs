@@ -17,8 +17,8 @@ namespace ConsertoPraVoce.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public OrdemCompra()
         {
-            this.Entrada = new HashSet<Entrada>();
             this.Transacao = new HashSet<Transacao>();
+            this.EstoqueProduto = new HashSet<EstoqueProduto>();
         }
     
         public int Id { get; set; }
@@ -30,8 +30,8 @@ namespace ConsertoPraVoce.Model
     
         public virtual Fornecedor Fornecedor { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Entrada> Entrada { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Transacao> Transacao { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<EstoqueProduto> EstoqueProduto { get; set; }
     }
 }

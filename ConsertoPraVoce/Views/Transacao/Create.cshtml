@@ -10,6 +10,7 @@
 		$.getJSON('@Url.Action("BuscarSubCategorias", "Transacao")' + "?value=" + val, function (result) {
 			$("#IdSubCategoriaTransacao").html(""); // makes select null before filling process
 			var data = result.data;
+			console.log(result.data);
 			for (var i = 0; i < data.length; i++) {
 				$("#IdSubCategoriaTransacao").append("<option value=" + data[i].Value + ">" + data[i].Text + "</option>")
 			}

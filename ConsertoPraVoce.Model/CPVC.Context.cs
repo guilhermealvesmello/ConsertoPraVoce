@@ -42,14 +42,13 @@ namespace ConsertoPraVoce.Model
         public virtual DbSet<MetodoPagamento> MetodoPagamento { get; set; }
         public virtual DbSet<Fornecedor> Fornecedor { get; set; }
         public virtual DbSet<Cor> Cor { get; set; }
-        public virtual DbSet<Entrada> Entrada { get; set; }
-        public virtual DbSet<ItemEntrada> ItemEntrada { get; set; }
-        public virtual DbSet<ItemSaida> ItemSaida { get; set; }
         public virtual DbSet<Produto> Produto { get; set; }
-        public virtual DbSet<Saida> Saida { get; set; }
         public virtual DbSet<CategoriaTransacao> CategoriaTransacao { get; set; }
         public virtual DbSet<Transacao> Transacao { get; set; }
         public virtual DbSet<TransacaoItem> TransacaoItem { get; set; }
+        public virtual DbSet<EstoqueProduto> EstoqueProduto { get; set; }
+        public virtual DbSet<HistoricoEstoque> HistoricoEstoque { get; set; }
+        public virtual DbSet<OrdemServicoHistorico> OrdemServicoHistorico { get; set; }
     
         public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
         {

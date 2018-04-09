@@ -22,7 +22,7 @@ namespace ConsertoPraVoce.Model
             [Required(ErrorMessage = "Você não pode deixar este campo em branco.")]
             [DisplayName("Data da Trasação")]
 			[DataType(DataType.Date)]
-			[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = "")]
+			//[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = "")]
 			public DateTime DataTransacao { get; set; }
 
             [DisplayName("Descrição")]

@@ -42,7 +42,7 @@ namespace ConsertoPraVoce.Controllers
 		public ActionResult Create()
 		{
 			ViewBag.IdCategoriaTransacao = new SelectList(db.CategoriaTransacao.Where(c => !c.IdCategoriaPai.HasValue), "Id", "Descricao");
-			//ViewBag.IdSubCategoriaTransacao = new SelectList(db.CategoriaTransacao.Where(c => c.IdCategoriaPai.HasValue), "Id", "Descricao");
+			ViewBag.IdSubCategoriaTransacao = new SelectList(db.CategoriaTransacao.Where(c => c.IdCategoriaPai.HasValue), "Id", "Descricao");
 			ViewBag.IdCliente = new SelectList(db.Cliente, "Id", "Nome");
 			ViewBag.IdConta = new SelectList(db.Conta, "Id", "Descricao");
 			//ViewBag.IdMetodoPagamento = new SelectList(db.MetodoPagamento, "Id", "Descricao");
