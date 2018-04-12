@@ -243,6 +243,7 @@
     <Compile Include="Controllers\MarcaController.cs" />
     <Compile Include="Controllers\MetodoPagamentoController.cs" />
     <Compile Include="Controllers\ModeloAparelhoController.cs" />
+    <Compile Include="Controllers\OrdemCompraController.cs" />
     <Compile Include="Controllers\OrdemServicoController.cs" />
     <Compile Include="Controllers\PrecoServicoController.cs" />
     <Compile Include="Controllers\ProdutoController.cs" />
@@ -417,6 +418,7 @@
     <Content Include="Content\js\html5shiv.js" />
     <Content Include="Content\js\jquery-ui-v1.10.3.js" />
     <Content Include="Content\js\jquery.js" />
+    <Content Include="Content\js\jquery.tabletojson.min.js" />
     <Content Include="Content\js\jquery.ui.js" />
     <Content Include="Content\js\jvectormap\jquery-jvectormap-1.2.2.min.js" />
     <Content Include="Content\js\jvectormap\jquery-jvectormap-usa.js" />
@@ -761,6 +763,11 @@
     <Content Include="Views\EstoqueProduto\Details.cshtml" />
     <Content Include="Views\EstoqueProduto\Edit.cshtml" />
     <Content Include="Views\EstoqueProduto\Index.cshtml" />
+    <Content Include="Views\OrdemCompra\Create.cshtml" />
+    <Content Include="Views\OrdemCompra\Delete.cshtml" />
+    <Content Include="Views\OrdemCompra\Details.cshtml" />
+    <Content Include="Views\OrdemCompra\Edit.cshtml" />
+    <Content Include="Views\OrdemCompra\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

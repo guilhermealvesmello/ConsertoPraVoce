@@ -118,6 +118,7 @@
     <Compile Include="Marca.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
+    <Compile Include="Metadata\CategoriaTransacao.cs" />
     <Compile Include="Metadata\Conta.cs" />
     <Compile Include="Metadata\Marca.cs" />
     <Compile Include="Metadata\Cliente.cs" />
@@ -126,7 +127,6 @@
     <Compile Include="Metadata\Servico.cs" />
     <Compile Include="Metadata\OrdemServico.cs" />
     <Compile Include="Metadata\PrecoServico.cs" />
-    <Compile Include="Metadata\CategoriaTransacao.cs" />
     <Compile Include="Metadata\TipoAparelho.cs" />
     <Compile Include="Metadata\Transacao.cs" />
     <Compile Include="Metadata\Usuario.cs" />
