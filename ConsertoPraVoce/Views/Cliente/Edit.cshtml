@@ -3,7 +3,33 @@
 @{
 	ViewBag.Title = "Edit";
 }
+<script>
+	$(document).ready(function () {
+		buscarMarcas();
+	});
+	function buscarMarcas() {
+		$.getJSON('@Url.Action("BuscarMarcas", "OrdemCompra")', function (result) {
+			$("#ddlMarca").html(""); // makes select null before filling process
+			var data = result.data;
+			for (var i = 0; i < data.length; i++) {
+				$("#ddlMarca").append("<option value=" + data[i].Value + ">" + data[i].Text + "</option>")
+			}
+			buscarModelosAparelhos($("#ddlMarca").val());
+		})
 
+	}
+
+	function buscarModelosAparelhos(value) {
+		$.getJSON('@Url.Action("BuscarModelosAparelhos", "OrdemCompra")' + "?idMarca=" + value, function (result) {
+			$("#IdModeloAparelho").html(""); // makes select null before filling process
+			var data = result.data;
+			$("#IdModeloAparelho").append("<option value=\"null\">" + "Selecionar" + "</option>")
+			for (var i = 0; i < data.length; i++) {
+				$("#IdModeloAparelho").append("<option value=" + data[i].Value + ">" + data[i].Text + "</option>")
+			}
+		})
+	}
+</script>
 
 @using (Html.BeginForm())
 {
@@ -55,6 +81,19 @@
 			<div class="col-md-4">
 				@Html.EditorFor(model => model.Data, new { htmlAttributes = new { @class = "form-control" } })
 				@Html.ValidationMessageFor(model => model.Data, "", new { @class = "text-danger" })
+			</div>
+		</div>
+
+		<div class="form-group">
+			<label class="control-label col-md-2">Marca</label>
+			<div class="col-md-4">
+				<select class="form-control" id="ddlMarca" onchange="javascript:buscarModelosAparelhos(this.value);"></select>
+			</div>
+
+			@Html.LabelFor(model => model.IdModeloAparelho, htmlAttributes: new { @class = "control-label col-md-2" })
+			<div class="col-md-4">
+				@Html.DropDownList("IdModeloAparelho", null, "Selecionar", htmlAttributes: new { @class = "form-control" })
+				@Html.ValidationMessageFor(model => model.IdModeloAparelho, "", new { @class = "text-danger" })
 			</div>
 		</div>
 

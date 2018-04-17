@@ -25,7 +25,8 @@ namespace ConsertoPraVoce.Controllers
         // GET: Cliente
         public ActionResult Index()
         {
-            return View(db.Cliente.ToList());
+			var cliente = db.Cliente.Include(c => c.ModeloAparelho);
+            return View(cliente.ToList());
         }
 
         // GET: Cliente/Details/5
@@ -47,7 +48,7 @@ namespace ConsertoPraVoce.Controllers
         public ActionResult Create()
         {
 			var cli = LoadDefaultParameters();
-
+			ViewBag.IdModeloAparelho = new SelectList(db.ModeloAparelho, "Id", "Descricao");
 			return View(cli);
         }
 
@@ -56,7 +57,7 @@ namespace ConsertoPraVoce.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Nome,Email,Telefone1,Telefone2,DataNascimento,Notas,Data")] Cliente cliente)
+        public ActionResult Create([Bind(Include = "Id,Nome,Email,Telefone1,Telefone2,DataNascimento,Notas,Data,IdModeloAparelho")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -64,8 +65,8 @@ namespace ConsertoPraVoce.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(cliente);
+			ViewBag.IdModeloAparelho = new SelectList(db.ModeloAparelho, "Id", "Descricao");
+			return View(cliente);
         }
 
         // GET: Cliente/Edit/5
@@ -80,7 +81,8 @@ namespace ConsertoPraVoce.Controllers
             {
                 return HttpNotFound();
             }
-            return View(cliente);
+			ViewBag.IdModeloAparelho = new SelectList(db.ModeloAparelho, "Id", "Descricao", cliente.IdModeloAparelho);
+			return View(cliente);
         }
 
         // POST: Cliente/Edit/5
@@ -88,7 +90,7 @@ namespace ConsertoPraVoce.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Nome,Email,Telefone1,Telefone2,DataNascimento,Notas,Data")] Cliente cliente)
+        public ActionResult Edit([Bind(Include = "Id,Nome,Email,Telefone1,Telefone2,DataNascimento,Notas,Data,IdModeloAparelho")] Cliente cliente)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +98,8 @@ namespace ConsertoPraVoce.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cliente);
+			ViewBag.IdModeloAparelho = new SelectList(db.ModeloAparelho, "Id", "Descricao", cliente.IdModeloAparelho);
+			return View(cliente);
         }
 
         // GET: Cliente/Delete/5

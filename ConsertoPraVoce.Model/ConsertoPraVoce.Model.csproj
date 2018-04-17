@@ -179,7 +179,6 @@
     <Compile Include="Usuario.cs">
       <DependentUpon>CPVC.tt</DependentUpon>
     </Compile>
-    <Compile Include="ViewModel\OrdemCompraVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="CPVC.edmx">
@@ -208,6 +207,9 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

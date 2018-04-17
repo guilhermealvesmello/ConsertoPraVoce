@@ -3,8 +3,12 @@
 @{
 	ViewBag.Title = "Create";
 }
+
 <script>
 	$(document).ready(function () {
+
+		definirNomeTela("Criar Ordem de Compra");
+
 		$("#txtValorTotal").priceFormat({
 			prefix: '',
 			centsSeparator: ',',
@@ -19,7 +23,7 @@
 
 		$("#btnSave").on('click', function () {
 			var tabelaProdutos = gerarJsonFromTabela();
-			var url = '@Url.Action("SaveOrder", "OrdemCompra")';
+			var url = '@Url.Action("CriarOrdemDeCompra", "OrdemCompra")';
 			//var data = [];
 
 			//data.push(produtos);
@@ -29,13 +33,14 @@
 				type: "POST",
 				data: {
 					ordemCompra: {
-						DescricaoCurta: "\"" + $("#DescricaoCurta").val() + "\"",
-						DescricaoLonga: "\"" + $("#DescricaoLonga").val() + "\"",
-						DataCriacao: "\"" + Date($("#DataCriacao").val()) + "\"",
-						DataEdicao: "\"" + $("#DataEdicao").val() + "\"",
-						IdFornecedor: "\"" + $("#IdFornecedor").val() + "\""
-					},
-					produtos: tabelaProdutos
+						Descricao: "" + $("#DescricaoCurta").val() + "",
+						DescricaoLonga: "" + $("#DescricaoLonga").val() + "",
+						DataCriacao: "" + $("#DataCriacao").val() + "",
+						DataEdicao: "" + $("#DataEdicao").val() + "",
+						IdFornecedor: $("#IdFornecedor").val(),
+						IdMetodoPagamento: $("#ddlMetodoPagamento").val(),
+						Produtos: tabelaProdutos
+					}
 				},
 				datatype: 'json',
 				ContentType: 'application/json;utf-8'
@@ -66,7 +71,7 @@
 		});
 
 		buscarMarcas();
-
+		buscarMetodosDePagamento();
 	});
 
 	function excluirLinha(index) {
@@ -122,6 +127,19 @@
 		})
 	}
 
+	function buscarMetodosDePagamento() {
+		$.getJSON('@Url.Action("BuscarMetodosDePagamento", "OrdemCompra")', function (result) {
+			$("#ddlMetodoPagamento").html(""); // makes select null before filling process
+			var data = result.data;
+			for (var i = 0; i < data.length; i++) {
+				$("#ddlMetodoPagamento").append("<option value=" + data[i].Value + ">" + data[i].Text + "</option>")
+			}
+
+		})
+	}
+
+
+
 
 
 
@@ -156,13 +174,12 @@
 
 </script>
 
-@using (Html.BeginForm("Create", "OrdemCompra", FormMethod.Get, new { @class = "form-horizontal", @style = "max-width: 900px;" }))
+@using (Html.BeginForm("Create", "OrdemCompra", FormMethod.Get, new { @class = "form-horizontal col-md-12 col-lg-7" }))
 {
 	@Html.AntiForgeryToken()
-	@*<div class="form-horizontal" style="max-width: 800px;">*@
 
 	<div class="row">
-		<h4>OrdemCompra</h4>
+
 		<hr />
 		<fieldset>
 			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -202,6 +219,15 @@
 					@Html.ValidationMessageFor(model => model.DataEdicao, "", new { @class = "text-danger" })
 				</div>
 			</div>
+
+			<div class="form-group">
+				<label class="control-label col-md-2">Método de Pagamento</label>
+				<div class="col-md-4">
+					<select class="form-control" id="ddlMetodoPagamento"></select>
+				</div>
+			</div>
+
+
 			<div class="form-group ">
 				<div class="col-md-2">
 					<h5 class="blog-title pull-right">Adicionar Produtos</h5>
@@ -299,7 +325,4 @@
 	<div>
 		@Html.ActionLink("Voltar à Lista", "Index")
 	</div>
-	@*</div>*@
 }
-
-

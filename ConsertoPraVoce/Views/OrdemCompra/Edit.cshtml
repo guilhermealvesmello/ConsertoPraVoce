@@ -4,6 +4,12 @@
     ViewBag.Title = "Edit";
 }
 
+<script type="text/javascript">
+	$(function () {
+		definirNomeTela("Editar Ordem de Compra");
+	});
+</script>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()

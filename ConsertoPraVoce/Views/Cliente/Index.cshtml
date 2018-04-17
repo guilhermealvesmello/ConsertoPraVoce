@@ -31,9 +31,9 @@
 								<th>
 									@Html.DisplayNameFor(model => model.Telefone2)
 								</th>
-								@*<th>
-									@Html.DisplayNameFor(model => model.DataNascimento)
-								</th>*@
+								<th>
+									@Html.DisplayNameFor(model => model.ModeloAparelho.Descricao)
+								</th>
 								<th>
 									@Html.DisplayNameFor(model => model.Notas)
 								</th>
@@ -60,9 +60,9 @@
 									<td style="white-space:nowrap;">
 										@Html.DisplayFor(modelItem => item.Telefone2)
 									</td>
-									@*<td>
-										@Html.DisplayFor(modelItem => item.DataNascimento)
-									</td>*@
+									<td>
+										@Html.DisplayFor(modelItem => item.ModeloAparelho.Descricao)
+									</td>
 									<td>
 										@Html.DisplayFor(modelItem => item.Notas)
 									</td>

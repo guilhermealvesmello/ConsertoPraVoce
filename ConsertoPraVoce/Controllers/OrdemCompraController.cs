@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ConsertoPraVoce.Model;
+using ConsertoPraVoce.Regras.ViewModel;
+using ConsertoPraVoce.Regras.Regras;
 
 namespace ConsertoPraVoce.Controllers
 {
@@ -40,7 +42,9 @@ namespace ConsertoPraVoce.Controllers
 		public ActionResult Create()
 		{
 			ViewBag.IdFornecedor = new SelectList(db.Fornecedor, "Id", "Nome");
-			return View();
+			var oc = new OrdemCompra();
+			oc.DataCriacao = DateTime.Now;
+			return View(oc);
 		}
 
 		// POST: OrdemCompra/Create
@@ -183,29 +187,22 @@ namespace ConsertoPraVoce.Controllers
 
 			return Json(new { data = "" }, JsonRequestBehavior.AllowGet);
 		}
-		
-		public JsonResult SaveOrder(OrdemCompra ordemCompra, Produtos[] produtos)
+
+		[HttpGet]
+		public JsonResult BuscarMetodosDePagamento()
 		{
-			//ctx.Orders.Add(order);
-			//foreach (var item in orditemdetails)
-			//{
-			//	item.OrderId = order.OrderId;
-			//	ctx.OrderItemDetails.Add(item);
-			//}
-			//ctx.SaveChanges();
+			var data = new SelectList(db.MetodoPagamento, "Id", "Descricao");
+			return Json(new { data = data }, JsonRequestBehavior.AllowGet);
+		}
+
+		public JsonResult CriarOrdemDeCompra(CriarOrdemDeCompraVM ordemCompra)
+		{
+			OrdemCompraRegras oc = new OrdemCompraRegras(ordemCompra);
+			oc.SalvarOrdemDeCompra();
+			
 			return Json(true, JsonRequestBehavior.AllowGet);
 		}
 
-		public class Produtos
-		{
-			public string Marca { get; set; }
-			public string Modelo { get; set; }
-			public string Tipo { get; set; }
-			public string Cor { get; set; }
-			public string Quantidade { get; set; }
-			public string ValorUnitario { get; set; }
-			public string ValorTotal { get; set; }
-		}
 
 
 
