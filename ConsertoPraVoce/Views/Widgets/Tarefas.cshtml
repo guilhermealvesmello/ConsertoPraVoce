@@ -1,0 +1,75 @@
+﻿<script type="text/javascript">
+	$(function () {
+		buscarTarefasPendentes();
+	});
+
+	function buscarTarefasPendentes() {
+		$.getJSON('@Url.Action("BuscarTarefasPendentes", "Tarefas")', function (result) {
+			var data = result.data;
+			$('#listaTarefas').html("");
+			var linha = "";
+			for (var i = 0; i < data.length; i++) {
+
+				linha += "<label class=\"todo-list-item info\">";
+				linha += "<input type=\"checkbox\" class=\"todo-list-cb\" id=" + data[i].Id + " onclick=\"atualizarStatusTarefa(this)\">";
+				linha += "<span class=\"todo-list-mark\"></span>";
+				linha += "<span class=\"todo-list-desc\">" + data[i].Descricao + "</span>";
+				linha += "</label>";
+			}
+			$('#listaTarefas').append(linha);
+		});
+	}
+
+	function atualizarStatusTarefa(value) {
+		var url = '@Url.Action("AtualizarStatusTarefa", "Tarefas")';
+
+		$.ajax({
+			url: url,
+			type: "POST",
+			data: {
+				idTarefa: value.id,
+				finalizada: $("#" + value.id).prop("checked")
+			},
+			datatype: 'json',
+			ContentType: 'application/json;utf-8'
+		}).done(function (resp) {
+			buscarTarefasPendentes();
+		});
+	}
+
+
+</script>
+<section class="todo">
+	<fieldset class="todo-list" id="listaTarefas">
+		@*<label class="todo-list-item info">
+				<input type="checkbox" class="todo-list-cb">
+				<span class="todo-list-mark"></span>
+				<span class="todo-list-desc">Attend seminar</span>
+			</label>
+			<label class="todo-list-item danger">
+				<input type="checkbox" class="todo-list-cb">
+				<span class="todo-list-mark"></span>
+				<span class="todo-list-desc">UX workshop</span>
+			</label>
+			<label class="todo-list-item success">
+				<input type="checkbox" class="todo-list-cb" checked>
+				<span class="todo-list-mark"></span>
+				<span class="todo-list-desc">Pickup kids at 4pm</span>
+			</label>
+			<label class="todo-list-item danger">
+				<input type="checkbox" class="todo-list-cb" checked>
+				<span class="todo-list-mark"></span>
+				<span class="todo-list-desc">Send wishes</span>
+			</label>
+			<label class="todo-list-item success">
+				<input type="checkbox" class="todo-list-cb">
+				<span class="todo-list-mark"></span>
+				<span class="todo-list-desc">Redesign Application</span>
+			</label>
+			<label class="todo-list-item info">
+				<input type="checkbox" class="todo-list-cb" checked>
+				<span class="todo-list-mark"></span>
+				<span class="todo-list-desc">Send an email</span>
+			</label>*@
+	</fieldset>
+</section>

@@ -249,6 +249,7 @@
     <Compile Include="Controllers\ProdutoController.cs" />
     <Compile Include="Controllers\ScriptsController.cs" />
     <Compile Include="Controllers\ServicoController.cs" />
+    <Compile Include="Controllers\TarefasController.cs" />
     <Compile Include="Controllers\TipoAparelhoController.cs" />
     <Compile Include="Controllers\TipoProdutoController.cs" />
     <Compile Include="Controllers\TransacaoController.cs" />
@@ -768,6 +769,12 @@
     <Content Include="Views\OrdemCompra\Details.cshtml" />
     <Content Include="Views\OrdemCompra\Edit.cshtml" />
     <Content Include="Views\OrdemCompra\Index.cshtml" />
+    <Content Include="Views\Tarefas\Create.cshtml" />
+    <Content Include="Views\Tarefas\Delete.cshtml" />
+    <Content Include="Views\Tarefas\Details.cshtml" />
+    <Content Include="Views\Tarefas\Edit.cshtml" />
+    <Content Include="Views\Tarefas\Index.cshtml" />
+    <Content Include="Views\Widgets\Tarefas.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

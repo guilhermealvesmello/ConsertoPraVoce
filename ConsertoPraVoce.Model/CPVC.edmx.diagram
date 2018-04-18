@@ -49,6 +49,7 @@
         <AssociationConnector Association="CPVCModel.FK_OrdemServicoHistorico_OrdemServico" />
         <AssociationConnector Association="CPVCModel.FK_OrdemServicoHistorico_Usuario" />
         <AssociationConnector Association="CPVCModel.FK_EstoqueProduto_Produto" />
+        <EntityTypeShape EntityType="CPVCModel.Tarefas" Width="1.5" PointX="7.375" PointY="8.75" />
         </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

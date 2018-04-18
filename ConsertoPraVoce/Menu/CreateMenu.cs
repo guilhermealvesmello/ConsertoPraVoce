@@ -11,6 +11,7 @@ namespace ConsertoPraVoce.Menu
 		{
 			var menu = new List<Menu>();
 
+			menu.Add(CriarMenu("Index", "Tarefas", "Tarefas", "fa fa-handshake-o"));
 			menu.Add(CriarMenu("Index", "Fornecedor", "Fornecedores", "fa fa-handshake-o"));
 			menu.Add(CriarMenu("Index", "Cliente", "Clientes", "fa fa-users"));
 			menu.Add(CriarMenu("Index", "Conta", "Contas", "fa fa-bank"));
