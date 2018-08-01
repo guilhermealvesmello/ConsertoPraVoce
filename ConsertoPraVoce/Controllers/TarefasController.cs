@@ -126,7 +126,7 @@ namespace ConsertoPraVoce.Controllers
 		[HttpGet]
 		public JsonResult BuscarTarefasPendentes()
 		{
-			var data = db.Tarefas.Where(c => !c.Finalizada.HasValue || c.Finalizada.Value == false).ToList();
+			var data = db.Tarefas.ToList();
 			return Json(new { data = data }, JsonRequestBehavior.AllowGet);
 		}
 

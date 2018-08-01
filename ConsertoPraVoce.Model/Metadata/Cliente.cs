@@ -48,7 +48,10 @@ namespace ConsertoPraVoce.Model
 			//[DisplayFormat(DataFormatString = "{0:dd.MM.yyyy HH:mm}", ApplyFormatInEditMode = true)]
 			public DateTime Data { get; set; }
 
-        }
+			[DisplayName("Modelo Aparelho")]			
+			public Nullable<int> IdModeloAparelho { get; set; }
+
+		}
 
     }
 }

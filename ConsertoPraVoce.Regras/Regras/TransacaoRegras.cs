@@ -47,6 +47,23 @@ namespace ConsertoPraVoce.Regras.Regras
 		private List<TransacaoItem> GerarItensTransacao(Transacao t)
 		{
 			var lista = new List<TransacaoItem>();
+			if (t.Parcelas == 0)
+			{
+				var ti = new TransacaoItem();
+				ti.IdTransacao = t.Id;
+				ti.DataTransacao = t.DataTransacao;
+				ti.DataPrevistaCredito = t.DataTransacao.AddDays(1);
+				ti.ValorBruto = GerarValorBrutoItem(t);
+				ti.ValorLiquido = -1;
+				ti.QuantidadeParcelas = t.Parcelas;
+				ti.NumeroParcela = 0;
+				ti.PagamentoEfetuado = false;
+				ti.DataAlteracao = DateTime.Now;
+
+				lista.Add(ti);
+				return lista;
+			}
+
 			for (int i = 0; i < t.Parcelas; i++)
 			{
 				var ti = new TransacaoItem();
@@ -63,15 +80,29 @@ namespace ConsertoPraVoce.Regras.Regras
 				lista.Add(ti);
 			}
 			return lista;
+
 		}
+
+		//private bool TipoTransacaoECredito(Transacao t)
+		//{
+		//	return db.CategoriaTransacao.First(c => c.Id == t.IdCategoriaTransacao).TipoDespesa == "C";
+		//}
 
 		private DateTime BuscarDataPrevistaCredito(Transacao t, int parcela)
 		{
+			if (t.Parcelas == 0)
+			{
+				return t.DataTransacao;
+			}
 			return t.DataTransacao.AddDays((30 * (parcela + 1)));
 		}
 
 		private decimal GerarValorBrutoItem(Transacao t)
 		{
+			if (t.Parcelas == 0)
+			{
+				return t.ValorBruto;
+			}
 			return t.ValorBruto / t.Parcelas;
 		}
 

@@ -4,6 +4,33 @@
 	ViewBag.Title = "Create";
 }
 
+<script type="text/javascript">
+	$(function () {
+		buscarMarcas();
+	});
+	function buscarMarcas() {
+		$.getJSON('@Url.Action("BuscarMarcas", "OrdemCompra")', function (result) {
+			$("#ddlMarca").html(""); // makes select null before filling process
+			var data = result.data;
+			for (var i = 0; i < data.length; i++) {
+				$("#ddlMarca").append("<option value=" + data[i].Value + ">" + data[i].Text + "</option>")
+			}
+			buscarModelosAparelhos($("#ddlMarca").val());
+		})
+
+	}
+
+	function buscarModelosAparelhos(value) {
+		$.getJSON('@Url.Action("BuscarModelosAparelhos", "OrdemCompra")' + "?idMarca=" + value, function (result) {
+			$("#IdModeloAparelho").html(""); // makes select null before filling process
+			var data = result.data;
+			for (var i = 0; i < data.length; i++) {
+				$("#IdModeloAparelho").append("<option value=" + data[i].Value + ">" + data[i].Text + "</option>")
+			}
+		})
+	}
+</script>
+
 @using (Html.BeginForm("Create", "Produto", FormMethod.Post, new { @class = "form-horizontal", @style = "max-width: 800px;" }))
 {
 	@Html.AntiForgeryToken()
@@ -15,28 +42,39 @@
 			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 			<div class="form-group">
+				<label class="control-label col-md-2">Marca</label>
+				<div class="col-md-4">
+					<select class="form-control" id="ddlMarca" onchange="javascript:buscarModelosAparelhos(this.value);"></select>
+				</div>
+
+				<label class="control-label col-md-2">Modelo</label>
+				<div class="col-md-4">
+					@Html.DropDownList("IdModeloAparelho", null, htmlAttributes: new { @class = "form-control" })
+					@Html.ValidationMessageFor(model => model.IdModeloAparelho, "", new { @class = "text-danger" })
+					@*<select class="form-control" id="ddlModelo" onchange="javascript:buscarTiposProdutos(this.value);"></select>*@
+				</div>
+			</div>
+
+			<div class="form-group">
 				@Html.LabelFor(model => model.IdTipoProduto, "IdTipoProduto", htmlAttributes: new { @class = "control-label col-md-2" })
-				<div class="col-md-10">
+				<div class="col-md-4">
 					@Html.DropDownList("IdTipoProduto", null, htmlAttributes: new { @class = "form-control" })
 					@Html.ValidationMessageFor(model => model.IdTipoProduto, "", new { @class = "text-danger" })
 				</div>
-			</div>
 
-			<div class="form-group">
-				@Html.LabelFor(model => model.IdModeloAparelho, "IdModeloAparelho", htmlAttributes: new { @class = "control-label col-md-2" })
-				<div class="col-md-10">
-					@Html.DropDownList("IdModeloAparelho", null, htmlAttributes: new { @class = "form-control" })
-					@Html.ValidationMessageFor(model => model.IdModeloAparelho, "", new { @class = "text-danger" })
-				</div>
-			</div>
-
-			<div class="form-group">
 				@Html.LabelFor(model => model.IdCor, "IdCor", htmlAttributes: new { @class = "control-label col-md-2" })
-				<div class="col-md-10">
+				<div class="col-md-4">
 					@Html.DropDownList("IdCor", null, "Selecionar", htmlAttributes: new { @class = "form-control" })
 					@Html.ValidationMessageFor(model => model.IdCor, "", new { @class = "text-danger" })
 				</div>
 			</div>
+
+			@*<div class="form-group">
+					@Html.LabelFor(model => model.IdModeloAparelho, "IdModeloAparelho", htmlAttributes: new { @class = "control-label col-md-2" })
+					<div class="col-md-10">
+
+					</div>
+				</div>*@
 
 			<div class="form-group">
 				@Html.LabelFor(model => model.Descricao, htmlAttributes: new { @class = "control-label col-md-2" })

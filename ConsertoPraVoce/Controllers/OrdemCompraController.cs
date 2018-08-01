@@ -145,7 +145,7 @@ namespace ConsertoPraVoce.Controllers
 		{
 			if (idMarca.HasValue)
 			{
-				var data = new SelectList(db.ModeloAparelho.Where(c => c.IdMarca == idMarca.Value), "Id", "Descricao");
+				var data = new SelectList(db.ModeloAparelho.Where(c => c.IdMarca == idMarca.Value).OrderBy(c=> c.Descricao) , "Id", "Descricao");
 				return Json(new { data = data }, JsonRequestBehavior.AllowGet);
 			}
 
@@ -160,6 +160,7 @@ namespace ConsertoPraVoce.Controllers
 				var tipos = from t in db.TipoProduto
 							join m in db.Produto on t.Id equals m.IdTipoProduto
 							where m.IdModeloAparelho == idModelo.Value
+							orderby t.Descricao
 							select t;
 
 				var data = new SelectList(tipos, "Id", "Descricao");
@@ -179,6 +180,7 @@ namespace ConsertoPraVoce.Controllers
 							join p in db.Produto on c.Id equals p.IdCor
 							where p.IdModeloAparelho == idModelo.Value
 								&& p.IdTipoProduto == idTipo.Value
+							orderby c.Descricao
 							select c;
 
 				var data = new SelectList(cores, "Id", "Descricao");

@@ -820,7 +820,7 @@
           <Property Name="Notas" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Data" Type="DateTime" Precision="3" />
           <NavigationProperty Name="OrdemServico" Relationship="CPVCModel.FK_OrdemServico_Cliente" FromRole="Cliente" ToRole="OrdemServico" />
-          <Property Name="IdModeloAparelho" Type="Int32" />
+          <Property Name="IdModeloAparelho" Type="Int32" Nullable="true" />
           <NavigationProperty Name="ModeloAparelho" Relationship="CPVCModel.FK_Cliente_ModeloAparelho" FromRole="Cliente" ToRole="ModeloAparelho" />
           <NavigationProperty Name="Transacao" Relationship="CPVCModel.FK_Transacao_Cliente" FromRole="Cliente" ToRole="Transacao" />
         </EntityType>
