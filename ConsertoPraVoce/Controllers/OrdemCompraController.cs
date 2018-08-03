@@ -145,7 +145,7 @@ namespace ConsertoPraVoce.Controllers
 		{
 			if (idMarca.HasValue)
 			{
-				var data = new SelectList(db.ModeloAparelho.Where(c => c.IdMarca == idMarca.Value).OrderBy(c=> c.Descricao) , "Id", "Descricao");
+				var data = new SelectList(db.ModeloAparelho.Where(c => c.IdMarca == idMarca.Value).OrderBy(c => c.Descricao), "Id", "Descricao");
 				return Json(new { data = data }, JsonRequestBehavior.AllowGet);
 			}
 
@@ -153,41 +153,31 @@ namespace ConsertoPraVoce.Controllers
 		}
 
 		[HttpGet]
-		public JsonResult BuscarTiposProdutos(int? idModelo)
+		public JsonResult BuscarTiposProdutos()
 		{
-			if (idModelo.HasValue)
-			{
-				var tipos = from t in db.TipoProduto
-							join m in db.Produto on t.Id equals m.IdTipoProduto
-							where m.IdModeloAparelho == idModelo.Value
-							orderby t.Descricao
-							select t;
+			var tipos = from t in db.TipoProduto
+							//join m in db.Produto on t.Id equals m.IdTipoProduto
+							//where m.IdModeloAparelho == idModelo.Value
+						orderby t.Descricao
+						select t;
 
-				var data = new SelectList(tipos, "Id", "Descricao");
-				return Json(new { data = data }, JsonRequestBehavior.AllowGet);
-			}
-
-			return Json(new { data = "" }, JsonRequestBehavior.AllowGet);
+			var data = new SelectList(tipos, "Id", "Descricao");
+			return Json(new { data = data }, JsonRequestBehavior.AllowGet);
 		}
 
 
 		[HttpGet]
-		public JsonResult BuscarCores(int? idModelo, int? idTipo)
+		public JsonResult BuscarCores()
 		{
-			if (idModelo.HasValue)
-			{
-				var cores = from c in db.Cor
-							join p in db.Produto on c.Id equals p.IdCor
-							where p.IdModeloAparelho == idModelo.Value
-								&& p.IdTipoProduto == idTipo.Value
-							orderby c.Descricao
-							select c;
+			var cores = from c in db.Cor
+							//join p in db.Produto on c.Id equals p.IdCor
+							//where p.IdModeloAparelho == idModelo.Value
+							//	&& p.IdTipoProduto == idTipo.Value
+						orderby c.Descricao
+						select c;
 
-				var data = new SelectList(cores, "Id", "Descricao");
-				return Json(new { data = data }, JsonRequestBehavior.AllowGet);
-			}
-
-			return Json(new { data = "" }, JsonRequestBehavior.AllowGet);
+			var data = new SelectList(cores, "Id", "Descricao");
+			return Json(new { data = data }, JsonRequestBehavior.AllowGet);
 		}
 
 		[HttpGet]
@@ -199,9 +189,17 @@ namespace ConsertoPraVoce.Controllers
 
 		public JsonResult CriarOrdemDeCompra(CriarOrdemDeCompraVM ordemCompra)
 		{
-			OrdemCompraRegras oc = new OrdemCompraRegras(ordemCompra);
-			oc.SalvarOrdemDeCompra();
-			
+			try
+			{
+				OrdemCompraRegras oc = new OrdemCompraRegras(ordemCompra);
+				oc.SalvarOrdemDeCompra();
+			}
+			catch (Exception ex)
+			{
+				Response.StatusCode = (int)HttpStatusCode.InternalServerError;
+				return Json(ex.Message, JsonRequestBehavior.AllowGet);
+			}
+
 			return Json(true, JsonRequestBehavior.AllowGet);
 		}
 

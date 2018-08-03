@@ -52,7 +52,7 @@ namespace ConsertoPraVoce.Regras.Regras
 				int cor;
 				if (int.TryParse(itm.Cor, out cor))
 					this.IdCor = int.Parse(itm.Cor);
-				this.Quantidade = int.Parse(itm.Quantidade);
+				this.Quantidade = int.Parse(string.IsNullOrEmpty(itm.Quantidade) ? "1" : itm.Quantidade);
 				this.ValorUnitario = decimal.Parse(itm.ValorUnitario);
 				this.ValorTotal = decimal.Parse(itm.ValorTotal);
 			}
@@ -124,10 +124,8 @@ namespace ConsertoPraVoce.Regras.Regras
 
 		private void BuscarIdProduto(ItemOrdemDeCompra item)
 		{
-			var id = db.Produto.Where(p =>
-						p.IdModeloAparelho == item.IdModelo &&
-						p.IdTipoProduto == item.IdTipo &&
-						p.IdCor == item.IdCor).FirstOrDefault().Id;
+			ProdutoRegras pr = new ProdutoRegras();
+			var id = pr.GetProductIdOrCreateOne(item.IdModelo, item.IdTipo, item.IdCor);
 
 			item.IdProduto = id;
 		}

@@ -58,6 +58,7 @@
     <Compile Include="Regras\EstoqueProdutoRegras.cs" />
     <Compile Include="Regras\Fornecedor.cs" />
     <Compile Include="Regras\OrdemCompraRegras.cs" />
+    <Compile Include="Regras\ProdutoRegras.cs" />
     <Compile Include="Regras\TransacaoRegras.cs" />
     <Compile Include="ViewModel\CriarOrdemDeCompraVM.cs" />
   </ItemGroup>

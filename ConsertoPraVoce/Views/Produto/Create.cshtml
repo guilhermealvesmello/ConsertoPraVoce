@@ -58,9 +58,21 @@
 			<div class="form-group">
 				@Html.LabelFor(model => model.IdTipoProduto, "IdTipoProduto", htmlAttributes: new { @class = "control-label col-md-2" })
 				<div class="col-md-4">
-					@Html.DropDownList("IdTipoProduto", null, htmlAttributes: new { @class = "form-control" })
-					@Html.ValidationMessageFor(model => model.IdTipoProduto, "", new { @class = "text-danger" })
-				</div>
+					@foreach (var item in ViewBag.IdTipoProduto)
+					{
+					<div class="checkbox">
+						<label>
+							<input type="checkbox"
+								name="SelectedFruits"
+								value="@item.Value" /> @item.Text
+						</label>
+					</div>
+					}
+
+
+						@*@Html.DropDownList("IdTipoProduto", null, htmlAttributes: new { @class = "form-control" })
+						@Html.ValidationMessageFor(model => model.IdTipoProduto, "", new { @class = "text-danger" })*@
+					</div>
 
 				@Html.LabelFor(model => model.IdCor, "IdCor", htmlAttributes: new { @class = "control-label col-md-2" })
 				<div class="col-md-4">

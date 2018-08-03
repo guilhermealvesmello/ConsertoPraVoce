@@ -33,8 +33,8 @@ namespace ConsertoPraVoce.Menu
 			var prd = CriarMenu("", "", "Produtos", "fa fa-table", "has-sub");
 			prd.SubMenu.Add(CriarMenu("Index", "Marca", "Marcas", ""));
 			prd.SubMenu.Add(CriarMenu("Index", "TipoAparelho", "Tipos", ""));
-			prd.SubMenu.Add(CriarMenu("Index", "ModeloAparelho", "Produtos", ""));
-			prd.SubMenu.Add(CriarMenu("Index", "TipoProduto", "Categorias", ""));
+			prd.SubMenu.Add(CriarMenu("Index", "ModeloAparelho", "Modelo de Aparelhos", ""));
+			prd.SubMenu.Add(CriarMenu("Index", "TipoProduto", "Tipo do Produto", ""));
 			prd.SubMenu.Add(CriarMenu("Index", "Cor", "Cores", ""));
 			prd.SubMenu.Add(CriarMenu("Index", "Produto", "Produto Estoque", ""));
 			menu.Add(prd);

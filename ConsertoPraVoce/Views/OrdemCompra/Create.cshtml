@@ -22,6 +22,7 @@
 		//});
 
 		$("#btnSave").on('click', function () {
+			cleanErrorMessage();
 			var tabelaProdutos = gerarJsonFromTabela();
 			var url = '@Url.Action("CriarOrdemDeCompra", "OrdemCompra")';
 			//var data = [];
@@ -43,13 +44,13 @@
 					}
 				},
 				datatype: 'json',
-				ContentType: 'application/json;utf-8'
+				ContentType: 'application/json;utf-8',
+				error: function (err) {
+					setErrorMessage(err.responseJSON);
+				}
 			}).done(function (resp) {
-				alert('Success ' + resp);
-			}).error(function (err) {
-				alert("Error " + err.status);
-			});
-
+				window.location.href = 'Index';
+			})
 		});
 
 		$('#addProduto').click(function () {
@@ -72,7 +73,16 @@
 
 		buscarMarcas();
 		buscarMetodosDePagamento();
+		buscarCores();
 	});
+
+	function setErrorMessage(message) {
+		$("#errorMessage").html(message);
+	}
+
+	function cleanErrorMessage() {
+		$("#errorMessage").html("");
+	}
 
 	function excluirLinha(index) {
 		$("#linha" + index).remove();
@@ -105,7 +115,7 @@
 	}
 
 	function buscarTiposProdutos(value) {
-		$.getJSON('@Url.Action("BuscarTiposProdutos", "OrdemCompra")' + "?idModelo=" + value, function (result) {
+		$.getJSON('@Url.Action("BuscarTiposProdutos", "OrdemCompra")', function (result) {
 			$("#ddlTipo").html(""); // makes select null before filling process
 			var data = result.data;
 			for (var i = 0; i < data.length; i++) {
@@ -117,9 +127,10 @@
 
 	function buscarCores(idTipo) {
 		var idModelo = $("#ddlModelo").val();
-		$.getJSON('@Url.Action("BuscarCores", "OrdemCompra")' + "?idModelo=" + idModelo + "&idTipo=" + idTipo, function (result) {
+		$.getJSON('@Url.Action("BuscarCores", "OrdemCompra")', function (result) {
 			$("#ddlCor").html(""); // makes select null before filling process
 			var data = result.data;
+			$("#ddlCor").append("<option value=></option>")
 			for (var i = 0; i < data.length; i++) {
 				$("#ddlCor").append("<option value=" + data[i].Value + ">" + data[i].Text + "</option>")
 			}
@@ -314,6 +325,7 @@
 			<div class="form-group">
 				<div class="col-md-offset-2 col-lg-6">
 					<input type="button" id="btnSave" value="Salvar" class="btn btn-default" />
+					<span id="errorMessage" style="color: red"></span>
 				</div>
 			</div>
 		</fieldset>
